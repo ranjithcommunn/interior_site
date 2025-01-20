@@ -1,0 +1,45 @@
+#slider-boxes {
+  display: flex !important;
+}
+
+.slick-slide > div {
+  margin-right: 10px;
+}
+.slick-slide > div > div {
+  display: flex !important;
+}
+.slick-arrow {
+  color: black;
+}
+.slick-arrow::before {
+  color: black;
+}
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.custom-prev-arrow {
+  left: -2rem;
+}
+
+.custom-next-arrow {
+  right: -2.5rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .custom-next-arrow {
+    right: -2rem;
+  }
+  .custom-prev-arrow {
+    left: -1.5rem;
+  }
+}
