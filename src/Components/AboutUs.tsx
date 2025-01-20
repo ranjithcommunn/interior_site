@@ -56,7 +56,7 @@ const AboutUs: React.FC = () => {
     <section className="flex flex-col items-center text-center px-5 md:px-20 py-10">
       {/* Header Section */}
       <motion.h1
-        className="text-3xl font-bold mb-6"
+        className="text-3xl font-bold mb-6 font-Poppins"
         variants={textVariant}
         initial="hidden"
         animate="visible"
@@ -64,7 +64,7 @@ const AboutUs: React.FC = () => {
         Interior Designing
       </motion.h1>
       <motion.p
-        className="text-gray-700 mb-8 max-w-4xl"
+        className="text-gray-700 mb-8 max-w-4xl font-Poppins"
         variants={textVariant}
         initial="hidden"
         animate="visible"
@@ -92,8 +92,8 @@ const AboutUs: React.FC = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
             >
-              <h2 className="text-xl font-bold mb-2 text-left">{item.title}</h2>
-              <p className="text-gray-700 text-sm text-left">
+              <h2 className="text-xl font-bold mb-2 text-left font-Poppins">{item.title}</h2>
+              <p className="text-gray-700 text-sm text-left font-Poppins">
                 {item.description}
               </p>
             </motion.div>

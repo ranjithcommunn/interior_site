@@ -36,7 +36,7 @@ const contactData: ContactData[] = [
 
 const ContactUs: React.FC = () => {
   return (
-    <main>
+    <main className="font-Poppins">
       <section className="flex items-center justify-center text-center flex-col gap-2 my-10 px-5 md:px-20">
         <motion.h2
           className="font-bold text-2xl"

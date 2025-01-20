@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
         {/* Left Section */}
         <div>
           <img src={logo} alt="Company Logo" width={95} height={95} />
-          <p className="text-sm mt-4">
+          <p className="text-sm mt-4 font-DMSans">
             Your dream space deserves the best execution, and that’s where
             United Buildpro Pvt Ltd excels. Our construction services encompass
             everything from foundational work to structural builds, tailored to
@@ -65,7 +65,7 @@ const Footer: React.FC = () => {
             <a
               key={item.id}
               href={`#${item.title.toLowerCase()}`}
-              className="py-2 text-sm hover:text-gray-400 transition-colors"
+              className="py-2 text-sm hover:text-gray-400 transition-colors font-DMSans"
             >
               {item.title}
             </a>

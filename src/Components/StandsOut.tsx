@@ -51,7 +51,7 @@ const StandsOut: React.FC = () => {
   return (
     <section className="flex flex-col items-center text-center px-5 md:px-20 py-10">
       <motion.h1
-        className="text-3xl font-bold mb-6"
+        className="text-3xl font-bold mb-6 font-Poppins"
         variants={itemVariant}
         initial="hidden"
         whileInView="visible"
@@ -81,7 +81,7 @@ const StandsOut: React.FC = () => {
             />
             <div className="text-left">
               <motion.h3
-                className="font-bold"
+                className="font-bold font-Poppins"
                 variants={itemVariant}
                 initial="hidden"
                 whileInView="visible"
@@ -94,6 +94,7 @@ const StandsOut: React.FC = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: false, amount: 0.2 }}
+                className="font-Roboto"
               >
                 {item.info}
               </motion.p>

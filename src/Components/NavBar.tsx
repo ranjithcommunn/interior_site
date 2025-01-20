@@ -153,7 +153,7 @@ const NavBar = () => {
           {menuList.map((item, index) => (
             <li key={index} className="group relative">
               <button
-                className="flex items-center gap-2 text-white text-sm"
+                className="flex items-center gap-2 text-white text-[16px] font-Poppins"
                 onClick={() => toggleDropdown(index)}
               >
                 {item.name}
@@ -166,12 +166,12 @@ const NavBar = () => {
               {/* Dropdown menu */}
               {activeDropdown === index && (
                 <div className="absolute left-0 bg-white w-48 mt-2 rounded-md shadow-lg z-10">
-                  <ul className="space-y-2 p-2">
+                  <ul className="space-y-1 p-2">
                     {item.menuSubList.map((subItem, subIndex) => (
                       <li key={subIndex}>
                         <Link
                           to={subItem.link}
-                          className="block px-4 py-2 text-sm hover:bg-gray-200 rounded-md"
+                          className="block px-4 py-1 text-[14px] hover:bg-gray-200 rounded-md font-Roboto"
                           onClick={handleLinkClick}
                         >
                           {subItem.name}
@@ -212,7 +212,7 @@ const NavBar = () => {
             {menuList.map((item, index) => (
               <li key={index} className="group relative">
                 <button
-                  className="flex items-center gap-2 text-white text-sm w-full justify-between"
+                  className="flex items-center gap-2 text-white text-sm w-full justify-between font-Poppins"
                   onClick={() => toggleDropdown(index)}
                 >
                   {item.name}
@@ -230,7 +230,7 @@ const NavBar = () => {
                         <li key={subIndex}>
                           <Link
                             to={subItem.link}
-                            className="block px-4 py-2 text-sm hover:bg-gray-700 rounded-md"
+                            className="block px-4 py-2 text-sm hover:bg-gray-700 rounded-md font-Roboto"
                             onClick={handleLinkClick}
                           >
                             {subItem.name}

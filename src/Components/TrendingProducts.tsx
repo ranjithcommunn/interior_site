@@ -47,7 +47,7 @@ const TrendingProducts: React.FC = () => {
           alt="Trending Products Icon"
           className="w-6 h-6"
         />
-        <h2 className="text-lg md:text-xl font-bold">Trending Products</h2>
+        <h2 className="text-lg md:text-xl font-bold font-Poppins">Trending Products</h2>
       </motion.div>
 
       {/* Products Grid */}
@@ -76,7 +76,7 @@ const TrendingProducts: React.FC = () => {
 
             {/* View More Button */}
             <button
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black text-white text-[10px] md:text-base px-6 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-100"
+              className="absolute font-Poppins top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black text-white text-[10px] md:text-base px-6 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-100"
             >
               <EnquireNowBtn />
             </button>
@@ -84,7 +84,7 @@ const TrendingProducts: React.FC = () => {
 
             {/* Product Name */}
             <div className="p-4">
-              <h3 className="text-sm md:text-base text-gray-800">
+              <h3 className="text-sm md:text-base text-gray-800 font-Poppins">
                 {product.name}
               </h3>
             </div>

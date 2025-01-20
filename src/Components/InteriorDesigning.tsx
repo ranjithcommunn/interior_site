@@ -80,7 +80,7 @@ const InteriorDesigning: React.FC = () => {
     <section className="bg-[#D3D3D3] flex flex-col items-center text-center px-5 md:px-40 lg:px-40 py-10">
       {/* Header */}
       <motion.h1
-        className="text-2xl font-bold mb-4"
+        className="text-2xl font-bold mb-4 font-Poppins"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -88,7 +88,7 @@ const InteriorDesigning: React.FC = () => {
         {InteriorDesigningList[currentSlide].title}
       </motion.h1>
       <motion.p
-        className="text-gray-700 mb-5"
+        className="text-gray-700 mb-5 font-Poppins"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}

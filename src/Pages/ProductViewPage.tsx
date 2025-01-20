@@ -40,7 +40,7 @@ const relatedProductsData: RelatedProduct[] = [
 
 const ProductViewPage: React.FC = () => {
   return (
-    <main className="box-border px-5 md:px-20">
+    <main className="box-border px-5 md:px-20 font-Poppins">
       <section className="flex flex-col md:flex-row my-8 gap-6">
         {/* Product Image */}
         <motion.div

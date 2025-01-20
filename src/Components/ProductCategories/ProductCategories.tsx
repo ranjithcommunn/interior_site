@@ -94,7 +94,7 @@ const ProductCategories: React.FC = () => {
       animate={{ opacity: 1, y: 0 }} // Fades in and slides into position
       transition={{ duration: 1, ease: "easeOut" }}
     >
-      <h1 className="text-xl font-bold my-5">Product Categories</h1>
+      <h1 className="text-xl font-bold my-5 font-Poppins">Product Categories</h1>
       <div className="relative w-full">
         <Slider {...settings}>
           {categoriesList.map((category) => (
@@ -109,7 +109,7 @@ const ProductCategories: React.FC = () => {
                 ease: "easeOut",
               }}
             >
-              <p className="text-lg font-bold">{category.name}</p>
+              <p className="text-lg font-bold font-Poppins">{category.name}</p>
               <motion.img
                 src={category.image_Url}
                 alt={category.name}

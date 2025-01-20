@@ -74,7 +74,7 @@ const typesOfKitchen: KitchenType[] = [
 
 const KitchenInterior: React.FC = () => {
   return (
-    <main>
+    <main className="font-Poppins">
       {/* Kitchen Image Section */}
       <motion.section
         className="relative"

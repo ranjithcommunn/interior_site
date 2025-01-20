@@ -230,7 +230,7 @@ const Search: React.FC = () => {
   ];
 
   return (
-    <main className="flex-grow box-border">
+    <main className="flex-grow box-border font-Poppins">
       {/* Mobile Dropdown */}
       <div className="md:hidden w-full mt-3 block px-4">
         <div className="bg-white flex flex-col border p-3 px-4 rounded-2xl">
