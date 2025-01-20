@@ -80,7 +80,7 @@ const InteriorDesigning: React.FC = () => {
     <section className="bg-[#D3D3D3] flex flex-col items-center text-center px-5 md:px-40 lg:px-40 py-10">
       {/* Header */}
       <motion.h1
-        className="text-2xl font-bold mb-4 font-Poppins"
+        className="text-2xl md:text-heading1 md:leading-heading1 font-bold mb-4 font-Poppins"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -88,7 +88,7 @@ const InteriorDesigning: React.FC = () => {
         {InteriorDesigningList[currentSlide].title}
       </motion.h1>
       <motion.p
-        className="text-gray-700 mb-5 font-Poppins"
+        className="text-gray-700 mb-5 font-Poppins text-base md:px-24 md:text-text1 md:leading-text1"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -96,7 +96,7 @@ const InteriorDesigning: React.FC = () => {
         {InteriorDesigningList[currentSlide].description}
       </motion.p>
       <motion.button
-        className="bg-[#1B1B1B] text-white text-sm md:text-base px-6 py-2 rounded-lg my-5"
+        className="bg-[#1B1B1B] text-white text-sm md:text-button3 md:leading-button3 px-6 py-2 rounded-lg my-5"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >

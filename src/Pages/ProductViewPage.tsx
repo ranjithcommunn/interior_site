@@ -58,7 +58,7 @@ const ProductViewPage: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h3 className="text-2xl font-bold">Bedroom</h3>
+            <h3 className="text-2xl font-bold md:text-heading1 md:leading-heading1">Bedroom</h3>
             <div className="flex items-center gap-3 mt-4">
               <div className="rounded-full">
                 <img src={designerProfile01} alt="profile" />
@@ -74,7 +74,7 @@ const ProductViewPage: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="w-[65%]"
+            className="w-[65%] text-base"
           >
             Discover the epitome of luxury living with our exquisite furniture
             collection. Embrace the elegance and sophistication in every piece.
@@ -87,7 +87,7 @@ const ProductViewPage: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="mt-3 w-full"
           >
-            <p className="text-sm">Customisation Available</p>
+            <p className="text-text1">Customisation Available</p>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -106,7 +106,7 @@ const ProductViewPage: React.FC = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.8 }}
       >
-        <h3 className="font-bold text-xl">Other related products</h3>
+        <h3 className="font-bold text-xl md:text-heading1 md:leading-heading1">Other related products</h3>
         <div className="grid md:grid-cols-4 mt-4">
           {relatedProductsData.map((item, index) => (
             <motion.div
@@ -118,11 +118,11 @@ const ProductViewPage: React.FC = () => {
             >
               <img src={item.imageUrl} alt="product image" />
               <div className="w-full text-center px-4 py-6 flex flex-col items-center">
-                <h4 className="font-bold text-md mb-3">{item.name}</h4>
+                <h4 className="font-bold text-md md:text-heading3 md:leading-heading3 mb-3">{item.name}</h4>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-black text-white rounded-md w-full p-2"
+                  className="bg-black text-white rounded-md w-full p-2 md:text-button1 md:leading-button1"
                 >
                   View Details
                 </motion.button>

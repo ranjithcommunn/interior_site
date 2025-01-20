@@ -39,7 +39,7 @@ const ContactUs: React.FC = () => {
     <main className="font-Poppins">
       <section className="flex items-center justify-center text-center flex-col gap-2 my-10 px-5 md:px-20">
         <motion.h2
-          className="font-bold text-2xl"
+          className="font-bold text-2xl md:text-[48px] md:leading-[72px]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
@@ -47,7 +47,7 @@ const ContactUs: React.FC = () => {
           Contact Us
         </motion.h2>
         <motion.p
-          className="md:w-[60%]"
+          className="md:w-[60%] md:text-heading3 md:leading-heading3"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
@@ -64,7 +64,7 @@ const ContactUs: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
         >
-          <h4 className="font-bold text-lg my-4">Get In Touch</h4>
+          <h4 className="font-bold text-lg my-4 md:text-heading2 md:leading-heading2">Get In Touch</h4>
           <div className="flex flex-col items-center md:items-start md:text-left gap-4 md:gap-3">
             {contactData.map((item) => (
               <motion.div
@@ -75,9 +75,9 @@ const ContactUs: React.FC = () => {
               >
                 <div className="flex items-center gap-3">
                   <img src={item.icon} alt={item.title} />
-                  <h5 className="text-md font-bold">{item.title}</h5>
+                  <h5 className="text-md font-bold md:text-heading3 md:leading-heading3">{item.title}</h5>
                 </div>
-                <p className="text-gray-600 text-sm">{item.discription}</p>
+                <p className="text-gray-600 text-sm md:text-base">{item.discription}</p>
               </motion.div>
             ))}
           </div>
@@ -98,7 +98,7 @@ const ContactUs: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          <h4 className="font-bold text-xl">Request a Call Back</h4>
+          <h4 className="font-bold text-xl md:text-heading2 md:leading-heading2">Request a Call Back</h4>
           <motion.input
             placeholder="Name"
             type="text"
@@ -129,7 +129,7 @@ const ContactUs: React.FC = () => {
           />
           <motion.button
             type="submit"
-            className="bg-black text-white p-2 rounded-lg w-full mt-3"
+            className="bg-black text-white p-2 rounded-lg w-full mt-3 md:text-button1 md:leading-button1"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           >

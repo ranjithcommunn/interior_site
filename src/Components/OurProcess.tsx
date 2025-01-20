@@ -65,7 +65,7 @@ const OurProcess: React.FC = () => {
   return (
     <section className="flex flex-col items-center text-center px-5 md:px-20 py-10">
       <motion.h1
-        className="text-3xl font-bold mb-6 font-Poppins"
+        className="text-3xl font-bold mb-6 font-Poppins md:text-heading1 md:leading-heading1"
         variants={processVariant}
         initial="hidden"
         animate="visible"
@@ -94,7 +94,7 @@ const OurProcess: React.FC = () => {
             />
             <div className="text-left">
               <motion.h3
-                className="font-bold font-Poppins"
+                className="font-bold font-Poppins md:text-heading3 md:leading-heading3"
                 variants={processVariant}
                 initial="hidden"
                 whileInView="visible"
@@ -107,7 +107,7 @@ const OurProcess: React.FC = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
-                className="font-Poppins"
+                className="font-Poppins md:text-text1 md:leading-text1"
               >
                 {process.info}
               </motion.p>

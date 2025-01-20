@@ -139,10 +139,10 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="bg-black flex items-center h-16 md:h-20 px-5 md:px-20 gap-10 justify-between">
-      <div className="flex items-center gap-10">
+    <nav className="bg-black flex items-center h-[72px] md:h-[115px] px-5 md:px-20 gap-10 justify-between">
+      <div className="flex items-center gap-10 box-border">
         <Link to={"/"} className="flex items-center justify-center">
-          <img src={Logo} width={95} height={95} className="mt-2" alt="Logo" />
+          <img src={Logo}  className="md:mt-4 mt-2 h-20  md:h-full md:w-full" alt="Logo" />
         </Link>
 
         {/* Desktop Menu */}
@@ -153,7 +153,7 @@ const NavBar = () => {
           {menuList.map((item, index) => (
             <li key={index} className="group relative">
               <button
-                className="flex items-center gap-2 text-white text-[16px] font-Poppins"
+                className="flex items-center gap-2 text-white text-base font-Poppins font-bold"
                 onClick={() => toggleDropdown(index)}
               >
                 {item.name}
@@ -165,7 +165,7 @@ const NavBar = () => {
               </button>
               {/* Dropdown menu */}
               {activeDropdown === index && (
-                <div className="absolute left-0 bg-white w-48 mt-2 rounded-md shadow-lg z-10">
+                <div className="absolute left-0 bg-white w-48 mt-2 rounded-md shadow-lg z-10 font-Roboto">
                   <ul className="space-y-1 p-2">
                     {item.menuSubList.map((subItem, subIndex) => (
                       <li key={subIndex}>
@@ -212,7 +212,7 @@ const NavBar = () => {
             {menuList.map((item, index) => (
               <li key={index} className="group relative">
                 <button
-                  className="flex items-center gap-2 text-white text-sm w-full justify-between font-Poppins"
+                  className="flex items-center gap-2 text-white text-sm w-full justify-between font-Poppins font-bold"
                   onClick={() => toggleDropdown(index)}
                 >
                   {item.name}
@@ -224,13 +224,13 @@ const NavBar = () => {
                 </button>
                 {/* Mobile Dropdown menu */}
                 {activeDropdown === index && (
-                  <div className="bg-black text-white mt-2 rounded-md shadow-lg">
+                  <div className="bg-black text-white mt-2 rounded-md shadow-lg font-Roboto">
                     <ul className="space-y-2 p-2">
                       {item.menuSubList.map((subItem, subIndex) => (
                         <li key={subIndex}>
                           <Link
                             to={subItem.link}
-                            className="block px-4 py-2 text-sm hover:bg-gray-700 rounded-md font-Roboto"
+                            className="block px-4 py-2 text-sm hover:bg-gray-700 rounded-md font-Roboto font-normal"
                             onClick={handleLinkClick}
                           >
                             {subItem.name}

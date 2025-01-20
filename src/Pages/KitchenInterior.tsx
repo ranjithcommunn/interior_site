@@ -87,7 +87,7 @@ const KitchenInterior: React.FC = () => {
           alt="kitchen image"
           className="object-cover w-full"
         />
-        <h3 className="absolute inset-0 flex items-center justify-center text-white md:text-3xl font-bold">
+        <h3 className="absolute inset-0 flex items-center justify-center text-white md:text-[48px] md:leading-[72px] font-bold">
           Welcome to VIBER Kitchen Interior
         </h3>
       </motion.section>
@@ -123,7 +123,7 @@ const KitchenInterior: React.FC = () => {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <h3 className="font-bold text-2xl mt-16 mb-12">Types of Kitchen</h3>
+        <h3 className="font-bold text-2xl mt-16 mb-12 md:text-[30px] md:leading-[45px]">Types of Kitchen</h3>
         <div className="flex flex-col items-center my-6 gap-16">
           {typesOfKitchen.map((item, index) => (
             <motion.div
@@ -139,8 +139,8 @@ const KitchenInterior: React.FC = () => {
                 alt={item.name}
               />
               <div className="flex flex-col items-start">
-                <h4 className="text-xl font-bold my-4">{item.name}</h4>
-                <p className="text-left">{item.discription}</p>
+                <h4 className="text-xl font-bold my-4 md:text-heading1 md:leading-heading1">{item.name}</h4>
+                <p className="text-left md:text-base">{item.discription}</p>
               </div>
             </motion.div>
           ))}

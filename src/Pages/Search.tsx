@@ -283,7 +283,7 @@ const Search: React.FC = () => {
       <section className="flex items-start justify-between py-5 w-full md:px-8">
         {/* Desktop Sidebar */}
         <div className="w-2/12 p-4 bg-white flex-0 hidden md:block">
-          <h2 className="text-xl font-bold mb-7">Sub - Categories</h2>
+          <h2 className="text-xl font-bold mb-7 md:text-heading2">Sub - Categories</h2>
           <ul>
             {menuList.map((item, index) => (
               <li key={index} className="mb-4">
@@ -291,7 +291,7 @@ const Search: React.FC = () => {
                   className="flex items-center justify-between py-3 cursor-pointer"
                   onClick={() => toggleMenu(index)}
                 >
-                  <p>{item.name}</p>
+                  <p className="text-text1 leading-text1">{item.name}</p>
                   {expandedMenus[index] ? (
                     <ChevronUp size={16} />
                   ) : (
@@ -330,8 +330,8 @@ const Search: React.FC = () => {
               }}
             >
               <img src={item.imageUrl} alt={item.title} />
-              <h5 className="text-lg">{item.title}</h5>
-              <button className="bg-black text-white rounded-md p-2 w-fit">
+              <h5 className="text-lg md:text-heading2 md:leading-heading2">{item.title}</h5>
+              <button className="bg-black text-white rounded-md p-2 w-fit md:text-heading3 md:leading-heading3 px-4">
                 <EnquireNowBtn/>
               </button>
             </motion.div>
@@ -341,11 +341,11 @@ const Search: React.FC = () => {
 
       <section className="bg-[#D3D3D3] w-full p-14 grid md:grid-cols-2 grid-cols-1 gap-2">
         <div className="flex flex-col items-start gap-2">
-          <h2 className="md:text-5xl text-4xl">
+          <h2 className="md:text-[64px] md:leading-[76px] text-4xl">
             Explore our <br />
             Bestsellers
           </h2>
-          <p className="text-sm md:text-base">
+          <p className="text-sm md:text-heading3 md:leading-heading3">
             Discover the epitome of luxury living with our exclusive furniture
             collection. Each piece is meticulously crafted to bring
             sophistication and elegance to your home. Our furniture is designed
@@ -398,15 +398,15 @@ const Search: React.FC = () => {
             >
               {BestsellersList.map((item, index) => (
                 <SwiperSlide key={index}>
-                  <div className="p-4 border rounded-lg bg-white shadow h-80">
+                  <div className="p-4 border rounded-lg bg-white shadow h-[342px] text-center flex flex-col items-center">
                     <img
                       src={item.imageUrl}
                       alt={item.title}
                       className="w-full h-auto rounded"
                     />
-                    <h3 className="text-lg font-bold mt-2">{item.title}</h3>
-                    <p className="text-sm text-gray-600">{item.subtitle}</p>
-                    <p className="text-lg font-bold mt-1">${item.price}</p>
+                    <p className="text-lg  mt-4 bg-black text-white w-fit rounded-lg px-2 p-1">${item.price}</p>
+                    <h3 className="text-lg text-center mt-2 md:text-heading3 md:leading-heading3">{item.title}</h3>
+                    <p className="text-sm text-gray-600 mb-10">{item.subtitle}</p>
                   </div>
                 </SwiperSlide>
               ))}

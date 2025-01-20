@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
         {/* Left Section */}
         <div>
           <img src={logo} alt="Company Logo" width={95} height={95} />
-          <p className="text-sm mt-4 font-DMSans">
+          <p className="text-sm mt-4 font-DMSans md:text-text1">
             Your dream space deserves the best execution, and that’s where
             United Buildpro Pvt Ltd excels. Our construction services encompass
             everything from foundational work to structural builds, tailored to

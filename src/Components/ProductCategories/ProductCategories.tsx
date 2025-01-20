@@ -94,13 +94,13 @@ const ProductCategories: React.FC = () => {
       animate={{ opacity: 1, y: 0 }} // Fades in and slides into position
       transition={{ duration: 1, ease: "easeOut" }}
     >
-      <h1 className="text-xl font-bold my-5 font-Poppins">Product Categories</h1>
+      <h1 className="text-xl md:text-heading1 md:leading-heading1 font-bold my-5 font-Poppins">Product Categories</h1>
       <div className="relative w-full">
         <Slider {...settings}>
           {categoriesList.map((category) => (
             <motion.div
               key={category.id}
-              className="bg-[#D3D3D3] rounded-md p-5 flex items-center justify-center flex-col h-52 mx-2 gap-5"
+              className="bg-[#D3D3D3] rounded-md p-6 flex items-center justify-center flex-col h-52 mx-2 gap-5"
               initial={{ opacity: 0, scale: 0.8 }} // Start smaller and invisible
               whileInView={{ opacity: 1, scale: 1 }} // Animate when in view
               viewport={{ once: true, amount: 0.5 }} // Trigger once when 50% visible
@@ -109,11 +109,11 @@ const ProductCategories: React.FC = () => {
                 ease: "easeOut",
               }}
             >
-              <p className="text-lg font-bold font-Poppins">{category.name}</p>
+              <p className="text-lg md:text-heading3 md:leading-heading3 font-bold font-Poppins">{category.name}</p>
               <motion.img
                 src={category.image_Url}
                 alt={category.name}
-                className="h-32 w-auto object-contain"
+                className="h-[103px] w-[103px]  object-contain"
                 whileHover={{ scale: 1.1 }} // Slight zoom on hover
                 transition={{ duration: 0.2 }}
               />
