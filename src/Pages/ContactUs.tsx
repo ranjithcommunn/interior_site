@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import phoneIcon from "../assets/phone_icon.svg";
 import EmailIcon from "../assets/mail_icon.svg";
 import LocationIcon from "../assets/location_icon.svg";
 import MapImage from "../assets/map_image.png";
 
-// Define the structure of the contact data
 interface ContactData {
   id: number;
   title: string;
@@ -35,6 +34,49 @@ const contactData: ContactData[] = [
 ];
 
 const ContactUs: React.FC = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    message: "",
+  });
+
+  const [errors, setErrors] = useState({
+    name: false,
+    phone: false,
+    email: false,
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const validateForm = () => {
+    const newErrors = {
+      name: formData.name.trim() === "",
+      phone: formData.phone.trim() === "",
+      email: formData.email.trim() === "",
+    };
+    setErrors(newErrors);
+    return !Object.values(newErrors).includes(true);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (validateForm()) {
+      console.log("Form Submitted", formData);
+      // Add API call logic here
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        message: "",
+      });
+      alert("Form submitted successfully!");
+    }
+  };
+
   return (
     <main className="font-Poppins">
       <section className="flex items-center justify-center text-center flex-col gap-2 my-10 px-5 md:px-20">
@@ -93,35 +135,51 @@ const ContactUs: React.FC = () => {
         </motion.div>
 
         <motion.form
-          className="bg-[#D3D3D3] p-10"
+          className="bg-[#D3D3D3] p-5 md:p-10"
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
+          onSubmit={handleSubmit}
         >
           <h4 className="font-bold text-xl md:text-heading2 md:leading-heading2">Request a Call Back</h4>
           <motion.input
+            name="name"
             placeholder="Name"
             type="text"
-            className="p-3 w-full rounded-lg my-2"
+            value={formData.name}
+            onChange={handleInputChange}
+            className={`p-3 w-full rounded-lg my-2 ${errors.name ? "border-red-500 border" : ""}`}
             whileFocus={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           />
+          {errors.name && <p className="text-red-500 text-sm">Name is required.</p>}
           <motion.input
+            name="phone"
             placeholder="Phone Number"
             type="number"
-            className="p-3 w-full rounded-lg my-2"
+            value={formData.phone}
+            onChange={handleInputChange}
+            className={`p-3 w-full rounded-lg my-2 ${errors.phone ? "border-red-500 border" : ""}`}
             whileFocus={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           />
+          {errors.phone && <p className="text-red-500 text-sm">Phone number is required.</p>}
           <motion.input
+            name="email"
             placeholder="Email"
             type="email"
-            className="p-3 w-full rounded-lg my-2"
+            value={formData.email}
+            onChange={handleInputChange}
+            className={`p-3 w-full rounded-lg my-2 ${errors.email ? "border-red-500 border" : ""}`}
             whileFocus={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           />
+          {errors.email && <p className="text-red-500 text-sm">Email is required.</p>}
           <motion.textarea
+            name="message"
             rows={5}
+            value={formData.message}
+            onChange={handleInputChange}
             className="p-3 w-full rounded-lg my-2"
             placeholder="Message"
             whileFocus={{ scale: 1.05 }}

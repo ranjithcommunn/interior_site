@@ -13,7 +13,7 @@ interface MenuSubItem {
 interface MenuItem {
   name: string;
   link: string;
-  menuSubList: MenuSubItem[];
+  menuSubList?: MenuSubItem[]; // Optional submenu list
 }
 
 const NavBar = () => {
@@ -21,9 +21,13 @@ const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const dropdownRef = useRef<HTMLUListElement | null>(null);
-  const dropdownMobRef = useRef<HTMLDivElement | null>(null)
+  const dropdownMobRef = useRef<HTMLDivElement | null>(null);
 
   const menuList: MenuItem[] = [
+    {
+      name: "Home",
+      link:"/",
+    },
     {
       name: "Living",
       link: "/",
@@ -102,19 +106,17 @@ const NavBar = () => {
       menuSubList: [
         { name: "Outdoor dining", link: "/" },
         { name: "Outdoor Seating & Chairs", link: "/" },
-        { name: "Outdoor SOdas", link: "/" },
+        { name: "Outdoor Sofas", link: "/" },
         { name: "Sun Loungers", link: "/" },
       ],
     },
     // Add other menu items here...
   ];
 
-  // Toggle dropdown visibility
   const toggleDropdown = (index: number): void => {
     setActiveDropdown(activeDropdown === index ? null : index);
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent): void => {
       if (
@@ -133,7 +135,6 @@ const NavBar = () => {
     };
   }, []);
 
-  // Close mobile menu when a link is clicked
   const handleLinkClick = (): void => {
     setIsMobileMenuOpen(false);
   };
@@ -142,44 +143,52 @@ const NavBar = () => {
     <nav className="bg-black flex items-center h-[72px] md:h-[115px] px-5 md:px-20 gap-10 justify-between">
       <div className="flex items-center gap-10 box-border">
         <Link to={"/"} className="flex items-center justify-center">
-          <img src={Logo}  className="md:mt-4 mt-2 h-20  md:h-full md:w-full" alt="Logo" />
+          <img src={Logo} className="md:mt-4 mt-2 h-20 md:h-full md:w-full" alt="Logo" />
         </Link>
 
         {/* Desktop Menu */}
-        <ul
-          className="bg-black hidden md:flex gap-10"
-          ref={dropdownRef}
-        >
+        <ul className="bg-black hidden md:flex gap-9" ref={dropdownRef}>
           {menuList.map((item, index) => (
             <li key={index} className="group relative">
-              <button
-                className="flex items-center gap-2 text-white text-base font-Poppins font-bold"
-                onClick={() => toggleDropdown(index)}
-              >
-                {item.name}
-                {activeDropdown === index ? (
-                  <ChevronUp size={16} />
-                ) : (
-                  <ChevronDown size={16} />
-                )}
-              </button>
-              {/* Dropdown menu */}
-              {activeDropdown === index && (
-                <div className="absolute left-0 bg-white w-48 mt-2 rounded-md shadow-lg z-10 font-Roboto">
-                  <ul className="space-y-1 p-2">
-                    {item.menuSubList.map((subItem, subIndex) => (
-                      <li key={subIndex}>
-                        <Link
-                          to={subItem.link}
-                          className="block px-4 py-1 text-[14px] hover:bg-gray-200 rounded-md font-Roboto"
-                          onClick={handleLinkClick}
-                        >
-                          {subItem.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              {item.menuSubList ? (
+                <>
+                  <button
+                    className="flex items-center gap-2 text-white text-base font-Poppins font-bold"
+                    onClick={() => toggleDropdown(index)}
+                  >
+                    {item.name}
+                    {activeDropdown === index ? (
+                      <ChevronUp size={16} />
+                    ) : (
+                      <ChevronDown size={16} />
+                    )}
+                  </button>
+                  {activeDropdown === index && (
+                    <div className="absolute left-0 bg-white w-40 min-w-fit mt-2 rounded-md shadow-lg z-10 font-Roboto">
+                      <ul className="space-y-1 p-2">
+                        {item.menuSubList.map((subItem, subIndex) => (
+                          <li key={subIndex}>
+                            <Link
+                              to={subItem.link}
+                              className="block px-4 py-1 text-[14px] hover:bg-gray-200 rounded-md font-Roboto"
+                              onClick={handleLinkClick}
+                            >
+                              {subItem.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <Link
+                  to={item.link}
+                  className="text-white text-base font-Poppins font-bold"
+                  onClick={handleLinkClick}
+                >
+                  {item.name}
+                </Link>
               )}
             </li>
           ))}
@@ -211,34 +220,45 @@ const NavBar = () => {
           <ul className="space-y-4 p-5">
             {menuList.map((item, index) => (
               <li key={index} className="group relative">
-                <button
-                  className="flex items-center gap-2 text-white text-sm w-full justify-between font-Poppins font-bold"
-                  onClick={() => toggleDropdown(index)}
-                >
-                  {item.name}
-                  {activeDropdown === index ? (
-                    <ChevronUp size={16} />
-                  ) : (
-                    <ChevronDown size={16} />
-                  )}
-                </button>
-                {/* Mobile Dropdown menu */}
-                {activeDropdown === index && (
-                  <div className="bg-black text-white mt-2 rounded-md shadow-lg font-Roboto">
-                    <ul className="space-y-2 p-2">
-                      {item.menuSubList.map((subItem, subIndex) => (
-                        <li key={subIndex}>
-                          <Link
-                            to={subItem.link}
-                            className="block px-4 py-2 text-sm hover:bg-gray-700 rounded-md font-Roboto font-normal"
-                            onClick={handleLinkClick}
-                          >
-                            {subItem.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                {item.menuSubList ? (
+                  <>
+                    <button
+                      className="flex items-center gap-2 text-white text-sm w-full justify-between font-Poppins font-bold"
+                      onClick={() => toggleDropdown(index)}
+                    >
+                      {item.name}
+                      {activeDropdown === index ? (
+                        <ChevronUp size={16} />
+                      ) : (
+                        <ChevronDown size={16} />
+                      )}
+                    </button>
+                    {activeDropdown === index && (
+                      <div className="bg-black text-white mt-2 rounded-md shadow-lg font-Roboto">
+                        <ul className="space-y-2 p-2">
+                          {item.menuSubList.map((subItem, subIndex) => (
+                            <li key={subIndex}>
+                              <Link
+                                to={subItem.link}
+                                className="block px-4 py-2 text-sm hover:bg-gray-700 rounded-md font-Roboto font-normal"
+                                onClick={handleLinkClick}
+                              >
+                                {subItem.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Link
+                    to={item.link}
+                    className="block text-white text-sm font-Poppins font-bold"
+                    onClick={handleLinkClick}
+                  >
+                    {item.name}
+                  </Link>
                 )}
               </li>
             ))}

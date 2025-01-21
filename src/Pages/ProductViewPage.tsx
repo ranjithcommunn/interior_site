@@ -107,22 +107,22 @@ const ProductViewPage: React.FC = () => {
         transition={{ duration: 0.5, delay: 0.8 }}
       >
         <h3 className="font-bold text-xl md:text-heading1 md:leading-heading1">Other related products</h3>
-        <div className="grid md:grid-cols-4 mt-4">
+        <div className="flex items-center justify-between mt-4">
           {relatedProductsData.map((item, index) => (
             <motion.div
               key={item.id} // Use item.id as the key
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 + index * 0.2 }}
-              className="bg-[#D3D3D3] flex flex-col items-center box-border w-fit rounded-lg"
+              className="bg-[#D3D3D3] flex flex-col items-center  box-border w-[302px] rounded-lg h-[352px]"
             >
               <img src={item.imageUrl} alt="product image" />
-              <div className="w-full text-center px-4 py-6 flex flex-col items-center">
-                <h4 className="font-bold text-md md:text-heading3 md:leading-heading3 mb-3">{item.name}</h4>
+              <div className="w-full text-center px-4 py-6 flex flex-col items-center justify-center">
+                <h4 className="font-bold text-md md:text-xl mb-3">{item.name}</h4>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-black text-white rounded-md w-full p-2 md:text-button1 md:leading-button1"
+                  className="bg-black text-white rounded-md w-full p-2 md:text-button2 md:leading-button2"
                 >
                   View Details
                 </motion.button>

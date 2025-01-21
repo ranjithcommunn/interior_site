@@ -6,14 +6,14 @@ import {
   ChevronUp,
 } from "lucide-react";
 import SearchImage01 from "../assets/search_image01.png";
-import SearchImage02 from '../assets/search_Image02.png';
-import SearchImage03 from '../assets/search_Image03.png';
-import SearchImage04 from '../assets/search_Image04.png';
-import SearchImage05 from '../assets/search_Image05.png';
-import SearchImage06 from '../assets/search_Image06.png';
-import SearchImage07 from '../assets/search_Image07.png';
-import SearchImage08 from '../assets/search_Image08.png';
-import SearchImage09 from '../assets/search_Image09.png';
+import SearchImage02 from "../assets/search_Image02.png";
+import SearchImage03 from "../assets/search_Image03.png";
+import SearchImage04 from "../assets/search_Image04.png";
+import SearchImage05 from "../assets/search_Image05.png";
+import SearchImage06 from "../assets/search_Image06.png";
+import SearchImage07 from "../assets/search_Image07.png";
+import SearchImage08 from "../assets/search_Image08.png";
+import SearchImage09 from "../assets/search_Image09.png";
 
 import SearchSection02Image01 from "../assets/search_section02_image01.png";
 import SearchSection02Image02 from "../assets/search_section02_image02.png";
@@ -23,6 +23,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { motion } from "framer-motion"; // Import motion
 import EnquireNowBtn from "@/Components/EnquireNowBtn";
+import { Link } from "react-router-dom";
 
 interface SearchData {
   id: number;
@@ -38,7 +39,7 @@ interface MenuSubItem {
 interface MenuItem {
   name: string;
   link: string;
-  menuSubList: MenuSubItem[];
+  menuSubList?: MenuSubItem[];
 }
 
 interface Bestseller {
@@ -99,14 +100,20 @@ const searchdata: SearchData[] = [
 
 const menuList: MenuItem[] = [
   {
+    name: "Home",
+    link: "/",
+  },
+  {
     name: "Living",
     link: "/",
     menuSubList: [
-      { name: "TV Units", link: "/" },
-      { name: "Box Shelves", link: "/" },
-      { name: "Shoe Rack", link: "/" },
-      { name: "Dressing Table", link: "/" },
-      { name: "Wardrobes", link: "/" },
+      { name: "Sofas", link: "/" },
+      { name: "Sofa Cum Bed", link: "/" },
+      { name: "Recliners", link: "/" },
+      { name: "Chairs", link: "/" },
+      { name: "Tables", link: "/" },
+      { name: "Bean Bags", link: "/" },
+      { name: "Pouffes", link: "/" },
     ],
   },
   {
@@ -124,75 +131,71 @@ const menuList: MenuItem[] = [
     name: "Dining",
     link: "/",
     menuSubList: [
-      { name: "TV Units", link: "/" },
-      { name: "Box Shelves", link: "/" },
-      { name: "Shoe Rack", link: "/" },
-      { name: "Dressing Table", link: "/" },
-      { name: "Wardrobes", link: "/" },
+      { name: "Dining Tables", link: "/" },
+      { name: "Dining Chairs", link: "/" },
+      { name: "Crockery Units", link: "/" },
     ],
   },
   {
     name: "Bedroom",
     link: "/",
     menuSubList: [
-      { name: "TV Units", link: "/" },
-      { name: "Box Shelves", link: "/" },
-      { name: "Shoe Rack", link: "/" },
-      { name: "Dressing Table", link: "/" },
-      { name: "Wardrobes", link: "/" },
+      { name: "Bed Cots", link: "/" },
+      { name: "Head Boards", link: "/" },
+      { name: "Bed Room Tables", link: "/" },
+      { name: "Bunker Beds", link: "/" },
     ],
   },
   {
     name: "Matress",
     link: "/",
     menuSubList: [
-      { name: "TV Units", link: "/" },
-      { name: "Box Shelves", link: "/" },
-      { name: "Shoe Rack", link: "/" },
-      { name: "Dressing Table", link: "/" },
-      { name: "Wardrobes", link: "/" },
+      { name: "King Size", link: "/" },
+      { name: "Queen Size", link: "/" },
+      { name: "Single Bed", link: "/" },
+      { name: "Double Bed", link: "/" },
     ],
   },
   {
     name: "Study",
     link: "/",
     menuSubList: [
-      { name: "TV Units", link: "/" },
-      { name: "Box Shelves", link: "/" },
-      { name: "Shoe Rack", link: "/" },
-      { name: "Dressing Table", link: "/" },
-      { name: "Wardrobes", link: "/" },
+      { name: "Study Tables", link: "/" },
+      { name: "Chairs", link: "/" },
     ],
   },
   {
     name: "Office",
     link: "/",
     menuSubList: [
-      { name: "TV Units", link: "/" },
-      { name: "Box Shelves", link: "/" },
-      { name: "Shoe Rack", link: "/" },
-      { name: "Dressing Table", link: "/" },
-      { name: "Wardrobes", link: "/" },
+      { name: "Cabin Tables", link: "/" },
+      { name: "Work Station Tables", link: "/" },
+      { name: "Office Boss Chairs", link: "/" },
+      { name: "Office Visitors chair", link: "/" },
+      { name: "Office Waiting chairs", link: "/" },
     ],
   },
   {
     name: "Outdoor",
     link: "/",
     menuSubList: [
-      { name: "TV Units", link: "/" },
-      { name: "Box Shelves", link: "/" },
-      { name: "Shoe Rack", link: "/" },
-      { name: "Dressing Table", link: "/" },
-      { name: "Wardrobes", link: "/" },
+      { name: "Outdoor dining", link: "/" },
+      { name: "Outdoor Seating & Chairs", link: "/" },
+      { name: "Outdoor SOdas", link: "/" },
+      { name: "Sun Loungers", link: "/" },
     ],
   },
   // Add other menu items here...
 ];
 
 const Search: React.FC = () => {
-  const [expandedMenus, setExpandedMenus] = useState<Record<number, boolean>>({});
+  const [expandedMenus, setExpandedMenus] = useState<Record<number, boolean>>(
+    {}
+  );
   const [mobileCategory, setMobileCategory] = useState<string | null>(null);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
 
   const toggleMenu = (index: number) => {
     setExpandedMenus((prev) => ({
@@ -239,11 +242,7 @@ const Search: React.FC = () => {
             onClick={() => setOpenMenu(!openMenu)}
           >
             <p>Select Sub category</p>
-            {openMenu ? (
-              <ChevronUp size={16} />
-            ) : (
-              <ChevronDown size={16} />
-            )}
+            {openMenu ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           </div>
 
           {openMenu && (
@@ -251,17 +250,24 @@ const Search: React.FC = () => {
               {menuList.map((item, index) => (
                 <li key={index} className="mb-2">
                   <div
-                    className="flex items-center justify-between cursor-pointer"
-                    onClick={() => toggleMobileCategory(item.name)}
+                    className={`flex items-center justify-between cursor-pointer ${
+                      item.menuSubList ? "" : "hover:text-black"
+                    }`}
+                    onClick={() =>
+                      item.menuSubList ? toggleMobileCategory(item.name) : null
+                    }
                   >
-                    <p>{item.name}</p>
-                    {mobileCategory === item.name ? (
-                      <ChevronUp size={16} />
-                    ) : (
-                      <ChevronDown size={16} />
-                    )}
+                    <Link to={item.link}>
+                      <p className="text-text1 leading-text1">{item.name}</p>
+                    </Link>
+                    {item.menuSubList &&
+                      (mobileCategory === item.name ? (
+                        <ChevronUp size={16} />
+                      ) : (
+                        <ChevronDown size={16} />
+                      ))}
                   </div>
-                  {mobileCategory === item.name && (
+                  {item.menuSubList && mobileCategory === item.name && (
                     <ul className="pl-4 mt-2">
                       {item.menuSubList.map((subItem, subIndex) => (
                         <li
@@ -283,22 +289,30 @@ const Search: React.FC = () => {
       <section className="flex items-start justify-between py-5 w-full md:px-8">
         {/* Desktop Sidebar */}
         <div className="w-2/12 p-4 bg-white flex-0 hidden md:block">
-          <h2 className="text-xl font-bold mb-7 md:text-heading2">Sub - Categories</h2>
+          <h2 className="text-xl font-bold mb-7 md:text-heading2">
+            Sub - Categories
+          </h2>
           <ul>
             {menuList.map((item, index) => (
               <li key={index} className="mb-4">
                 <div
-                  className="flex items-center justify-between py-3 cursor-pointer"
-                  onClick={() => toggleMenu(index)}
+                  className={`flex items-center justify-between py-3 cursor-pointer ${
+                    item.menuSubList ? "" : "hover:text-black"
+                  }`}
+                  onClick={() => item.menuSubList && toggleMenu(index)}
                 >
-                  <p className="text-text1 leading-text1">{item.name}</p>
-                  {expandedMenus[index] ? (
-                    <ChevronUp size={16} />
-                  ) : (
-                    <ChevronDown size={16} />
-                  )}
+                  <Link to={item.link}>
+                    <p className="text-text1 leading-text1">{item.name}</p>
+                  </Link>
+
+                  {item.menuSubList &&
+                    (expandedMenus[index] ? (
+                      <ChevronUp size={16} />
+                    ) : (
+                      <ChevronDown size={16} />
+                    ))}
                 </div>
-                {expandedMenus[index] && (
+                {item.menuSubList && expandedMenus[index] && (
                   <ul className="pl-4 mt-2">
                     {item.menuSubList.map((subItem, subIndex) => (
                       <li
@@ -330,18 +344,18 @@ const Search: React.FC = () => {
               }}
             >
               <img src={item.imageUrl} alt={item.title} />
-              <h5 className="text-lg md:text-heading2 md:leading-heading2">{item.title}</h5>
-              <button className="bg-black text-white rounded-md p-2 w-fit md:text-heading3 md:leading-heading3 px-4">
-                <EnquireNowBtn/>
+              <h5 className="text-lg md:text-xl">{item.title}</h5>
+              <button className="bg-black text-white rounded-md p-2 w-fit md:text-base px-4">
+                <EnquireNowBtn />
               </button>
             </motion.div>
           ))}
         </div>
       </section>
 
-      <section className="bg-[#D3D3D3] w-full p-14 grid md:grid-cols-2 grid-cols-1 gap-2">
+      <section className="bg-[#D3D3D3] w-full p-5 md:p-14 grid md:grid-cols-2 grid-cols-1 gap-2">
         <div className="flex flex-col items-start gap-2">
-          <h2 className="md:text-[64px] md:leading-[76px] text-4xl">
+          <h2 className="md:text-[56px] md:leading-[64px] text-4xl">
             Explore our <br />
             Bestsellers
           </h2>
@@ -358,16 +372,22 @@ const Search: React.FC = () => {
           <div className="relative w-full p-5">
             {/* Custom Navigation Buttons */}
             <button
-              className="custom-prev absolute top-1/2 -left-6 z-10 transform -translate-y-1/2 text-black p-2 rounded-full"
+              className={`custom-prev absolute top-1/2 -left-6 z-10 transform -translate-y-1/2 text-black p-2 rounded-full ${
+                isBeginning ? "opacity-0" : ""
+              }`}
               aria-label="Previous"
+              disabled={isBeginning}
             >
               <ChevronLeft size={20} />
             </button>
             <button
-              className="custom-next absolute top-1/2 -right-6 z-10 transform -translate-y-1/2 text-black p-2 rounded-full"
+              className={`custom-next absolute top-1/2 -right-6 z-10 transform -translate-y-1/2 text-black p-2 rounded-full ${
+                isEnd ? "opacity-0" : ""
+              }`}
               aria-label="Next"
+              disabled={isEnd}
             >
-              <ChevronRight size={20} /> {/* Right Arrow */}
+              <ChevronRight size={20} />
             </button>
 
             <Swiper
@@ -395,18 +415,32 @@ const Search: React.FC = () => {
                   spaceBetween: 40,
                 },
               }}
+              onSlideChange={(swiper) => {
+                setIsBeginning(swiper.isBeginning);
+                setIsEnd(swiper.isEnd);
+              }}
+              onInit={(swiper) => {
+                setIsBeginning(swiper.isBeginning);
+                setIsEnd(swiper.isEnd);
+              }}
             >
               {BestsellersList.map((item, index) => (
                 <SwiperSlide key={index}>
-                  <div className="p-4 border rounded-lg bg-white shadow h-[342px] text-center flex flex-col items-center">
+                  <div className="p-4 border rounded-lg bg-white shadow md:h-[342px] text-center flex flex-col items-center">
                     <img
                       src={item.imageUrl}
                       alt={item.title}
                       className="w-full h-auto rounded"
                     />
-                    <p className="text-lg  mt-4 bg-black text-white w-fit rounded-lg px-2 p-1">${item.price}</p>
-                    <h3 className="text-lg text-center mt-2 md:text-heading3 md:leading-heading3">{item.title}</h3>
-                    <p className="text-sm text-gray-600 mb-10">{item.subtitle}</p>
+                    <p className="text-lg mt-4 bg-black text-white w-fit rounded-lg px-2 p-1">
+                      ${item.price}
+                    </p>
+                    <h3 className="text-lg text-center mt-2 md:text-heading3 md:leading-heading3">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 mb-10">
+                      {item.subtitle}
+                    </p>
                   </div>
                 </SwiperSlide>
               ))}

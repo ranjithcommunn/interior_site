@@ -60,7 +60,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Right Section */}
-        <div className="flex flex-col h-80 flex-wrap mt-10 md:mt-0">
+        <div className="flex flex-col h-[340px] flex-wrap mt-10 md:mt-0">
           {footerItems.map((item) => (
             <a
               key={item.id}

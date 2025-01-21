@@ -94,7 +94,7 @@ const ProductCategories: React.FC = () => {
       animate={{ opacity: 1, y: 0 }} // Fades in and slides into position
       transition={{ duration: 1, ease: "easeOut" }}
     >
-      <h1 className="text-xl md:text-heading1 md:leading-heading1 font-bold my-5 font-Poppins">Product Categories</h1>
+      <h1 className="text-xl md:text-3xl font-bold my-5 font-Poppins">Product Categories</h1>
       <div className="relative w-full">
         <Slider {...settings}>
           {categoriesList.map((category) => (

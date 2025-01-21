@@ -92,7 +92,7 @@ const AboutUs: React.FC = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
             >
-              <h2 className="text-xl md:text-heading1 md:leading-heading1 font-bold mb-2 text-left font-Poppins">{item.title}</h2>
+              <h2 className="text-xl md:text-3xl font-bold mb-2 text-left font-Poppins">{item.title}</h2>
               <p className="text-gray-700 text-sm text-left font-Poppins md:text-text1 md:leading-text1">
                 {item.description}
               </p>

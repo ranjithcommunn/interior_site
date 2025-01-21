@@ -6,66 +6,116 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "./ui/alert-dialog";
+
 const EnquireNowBtn = () => {
-    
-    const [Open, setOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    message: "",
+  });
+  const [errors, setErrors] = useState({
+    name: "",
+    phone: "",
+    email: "",
+  });
+  const [open, setOpen] = useState(false);
 
   const handleDialogClose = () => {
     setOpen(false);
+    setFormData({ name: "", phone: "", email: "", message: "" });
+    setErrors({ name: "", phone: "", email: "" });
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: "" })); // Clear errors on input change
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form Submitted");
-  
+
+    // Validation
+    const newErrors = {
+      name: formData.name ? "" : "Name is required",
+      phone: formData.phone ? "" : "Phone number is required",
+      email: formData.email ? "" : "Email is required",
+    };
+
+    setErrors(newErrors);
+
+    // Check if there are any errors
+    if (Object.values(newErrors).some((error) => error !== "")) {
+      return; // Stop form submission if there are errors
+    }
+
+    console.log("Form Submitted:", formData);
+
     // Close the dialog after submission
     handleDialogClose();
-  
-    // Add API call logic here, for example:
-    // const formData = new FormData(e.target);
+
+    // Add API call logic here
     // sendFormDataToBackend(formData);
   };
-  
+
   return (
     <div>
-      <p
-        onClick={() => setOpen(true)}
-      >
-        Enquire Now
-      </p>
-      <AlertDialog open={Open}>
+      <p onClick={() => setOpen(true)}>Enquire Now</p>
+      <AlertDialog open={open}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>
               <h4 className="font-bold text-xl">Request a Call Back</h4>
             </AlertDialogTitle>
             <AlertDialogDescription>
-              <form className="px-2" onSubmit={(e) => handleSubmit(e)}>
+              <form className="px-2" onSubmit={handleSubmit}>
                 <input
+                  name="name"
                   placeholder="Name"
                   type="text"
-                  className="p-3 w-full rounded-lg my-2 border border-gray-400 text-black outline-none"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className={`p-3 w-full rounded-lg my-2 border ${
+                    errors.name ? "border-red-500" : "border-gray-400"
+                  } text-black outline-none`}
                 />
+                {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
                 <input
+                  name="phone"
                   placeholder="Phone Number"
                   type="number"
-                  className="p-3 w-full rounded-lg my-2 border border-gray-400 outline-none"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className={`p-3 w-full rounded-lg my-2 border ${
+                    errors.phone ? "border-red-500" : "border-gray-400"
+                  } outline-none`}
                 />
+                {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
                 <input
+                  name="email"
                   placeholder="Email"
                   type="email"
-                  className="p-3 w-full rounded-lg my-2 border border-gray-400 outline-none"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`p-3 w-full rounded-lg my-2 border ${
+                    errors.email ? "border-red-500" : "border-gray-400"
+                  } outline-none`}
                 />
+                {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                 <textarea
+                  name="message"
                   rows={5}
-                  className="p-3 w-full rounded-lg my-2 border border-gray-400 outline-none"
                   placeholder="Message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  className="p-3 w-full rounded-lg my-2 border border-gray-400 outline-none"
                 />
                 <div className="flex items-center justify-end gap-3">
                   <button
-                    type="button" // Change to type="button" to prevent form submission
+                    type="button"
                     onClick={handleDialogClose}
-                    className="bg-red-500 text-white p-2 px-6 rounded-lg  mt-3"
+                    className="bg-red-500 text-white p-2 px-6 rounded-lg mt-3"
                   >
                     Cancel
                   </button>
