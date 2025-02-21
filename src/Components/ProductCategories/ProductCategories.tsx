@@ -1,12 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion"; // Import Framer Motion
 import "react-multi-carousel/lib/styles.css";
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 import Slider, { Settings } from "react-slick";
-
 import "./ProductCategories.css";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import LivingRoom from "../../assets/Living_Room.png";
