@@ -9,6 +9,8 @@ import OurProcess from "../Components/OurProcess";
 import StandsOut from "../Components/StandsOut";
 
 const Home: React.FC = () => {
+
+ 
   return (
     <main>
       <HeroSection />
