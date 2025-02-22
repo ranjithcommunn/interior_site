@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-
+import MoonLoader from "react-spinners/MoonLoader";
 import {
   ChevronDown,
   ChevronLeft,
@@ -82,20 +82,27 @@ const CategoryPage = () => {
     () => fetchCategoryProducts(category_id)
   );
 
-  const { data: menudata, isLoading: menuisloading } = useQuery<{
+  const { data: menudata, isLoading: menuLoading } = useQuery<{
     product_categories: Category[];
   }>(["products"], fetchProducts);
 
-  const [expandedMenus, setExpandedMenus] = useState<Record<number, boolean>>({});
+  const [expandedMenus, setExpandedMenus] = useState<Record<number, boolean>>(
+    {}
+  );
   const [mobileCategory, setMobileCategory] = useState<string | null>(null);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
   // Now perform conditional rendering after all hooks are declared
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading && menuLoading) {
+    return (
+      <div className="w-screen flex justify-center items-center h-[80vh]">
+        <MoonLoader />
+      </div>
+    );
+  }
   if (error) return <p>Error loading products.</p>;
-  if (menuisloading) return <p>Loading...</p>;
 
   const menuList = menudata?.product_categories.filter(
     (category) => category.category_children?.length
@@ -244,8 +251,8 @@ const CategoryPage = () => {
 
         {/* Main Content */}
         <div className="w-full flex flex-col">
-          <h2 className="text-2xl font-bold capitalize p-4">
-            {category} : {subCategory}
+          <h2 className="text-xl font-bold capitalize p-4 text-gray-600">
+            {category} &gt; {subCategory}
           </h2>
           {(data?.products?.length ?? 0) > 0 ? (
             <div className=" bg-white p-4 grid grid-cols-2 md:grid-cols-4 gap-10 flex-1 w-full">
@@ -261,11 +268,14 @@ const CategoryPage = () => {
                     ease: "easeOut",
                   }}
                 >
-                  <img
-                    src={product.thumbnail}
-                    alt={product.title}
-                    className="border border-solid border-black rounded-xl w-[270px] h-[180px] object-contain"
-                  />
+                  
+                    <img
+                      src={product.thumbnail}
+                      alt={product.title}
+                      className="border border-solid border-black rounded-xl w-[270px] h-[190px] object-fill"
+                    />
+                
+
                   <h5 className="text-lg md:text-xl">{product.title}</h5>
                   <button className="bg-black text-white rounded-md p-2 w-fit md:text-base px-4">
                     <EnquireNowBtn />
