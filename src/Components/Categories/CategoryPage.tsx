@@ -119,6 +119,10 @@ const CategoryPage = () => {
     setMobileCategory((prev) => (prev === category ? null : category));
   };
 
+  function formatProductName(productName: string): string {
+    return productName.replace(/-/g, " ");
+  }
+
   const BestsellersList: Bestseller[] = [
     {
       id: 1,
@@ -252,8 +256,9 @@ const CategoryPage = () => {
         {/* Main Content */}
         <div className="w-full flex flex-col">
           <h2 className="text-xl font-bold capitalize p-4 text-gray-600">
-            {category} &gt; {subCategory}
+            {category} &gt; {subCategory ? formatProductName(subCategory) : ""}
           </h2>
+
           {(data?.products?.length ?? 0) > 0 ? (
             <div className=" bg-white p-4 grid grid-cols-2 md:grid-cols-4 gap-10 flex-1 w-full">
               {data?.products.map((product, index) => (
@@ -268,13 +273,11 @@ const CategoryPage = () => {
                     ease: "easeOut",
                   }}
                 >
-                  
-                    <img
-                      src={product.thumbnail}
-                      alt={product.title}
-                      className="border border-solid border-black rounded-xl w-[270px] h-[190px] object-fill"
-                    />
-                
+                  <img
+                    src={product.thumbnail}
+                    alt={product.title}
+                    className="border border-solid border-black rounded-xl w-[270px] h-[190px] object-fill"
+                  />
 
                   <h5 className="text-lg md:text-xl">{product.title}</h5>
                   <button className="bg-black text-white rounded-md p-2 w-fit md:text-base px-4">

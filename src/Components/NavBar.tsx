@@ -1,7 +1,7 @@
 import { Menu, ChevronDown, ChevronUp } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import Logo from "../assets/logo.png";
-import SearchIcon from "../assets/search_icon.svg";
+//import SearchIcon from "../assets/search_icon.svg";
 import UserIcon from "../assets/user_icon.svg";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -104,11 +104,11 @@ const NavBar = () => {
       </div>
 
       <div className="flex items-center gap-5 md:gap-10">
-        <Link to="/search" className="flex items-center">
+        {/* <Link to="/search" className="flex items-center">
           <button>
             <img src={SearchIcon} width={18} height={18} alt="Search Icon" />
           </button>
-        </Link>
+        </Link> */}
         <button>
           <img src={UserIcon} width={16} height={16} alt="User Icon" />
         </button>
