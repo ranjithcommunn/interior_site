@@ -5,12 +5,11 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Slider, { Settings } from "react-slick";
 
-// Type for Custom Arrow Props
+
 interface CustomArrowProps {
   onClick?: () => void;
 }
 
-// Custom Left Arrow
 const CustomPrevArrow: React.FC<CustomArrowProps> = ({ onClick }) => (
   <button
     className="absolute top-1/2 md:left-[-55px] left-[-30px] transform -translate-y-1/2 p-2 rounded-full hover:bg-gray-400 transition"
@@ -21,7 +20,7 @@ const CustomPrevArrow: React.FC<CustomArrowProps> = ({ onClick }) => (
   </button>
 );
 
-// Custom Right Arrow
+
 const CustomNextArrow: React.FC<CustomArrowProps> = ({ onClick }) => (
   <button
     className="absolute top-1/2 right-[-20px] md:right-[-45px] transform -translate-y-1/2 p-2 rounded-full hover:bg-gray-400 transition"
@@ -32,7 +31,6 @@ const CustomNextArrow: React.FC<CustomArrowProps> = ({ onClick }) => (
   </button>
 );
 
-// Type for Interior Designing Item
 interface InteriorDesigningItem {
   id: number;
   imageurl: string;
@@ -40,7 +38,7 @@ interface InteriorDesigningItem {
   description: string;
 }
 
-// List of Interior Designing Items
+
 const InteriorDesigningList: InteriorDesigningItem[] = [
   {
     id: 1,
@@ -58,7 +56,7 @@ const InteriorDesigningList: InteriorDesigningItem[] = [
   },
 ];
 
-// Slider Settings
+
 const settings: Settings = {
   dots: false,
   infinite: false,

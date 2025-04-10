@@ -29,11 +29,6 @@ interface KitchenType {
   imageUrl: string;
 }
 
-// interface HappyKitchenImage {
-//   id: number;
-//   image: string;
-// }
-
 const WhyChooseUsList: WhyChooseUsItem[] = [
   { id: 1, name: "No hidden charges", icon: TagIcon },
   { id: 2, name: "Flat 5 to 10 years warranty", icon: GurdIcon },
@@ -64,13 +59,6 @@ const typesOfKitchen: KitchenType[] = [
   },
 ];
 
-// const happyKitchenImages: HappyKitchenImage[] = [
-//   { id: 1, image: HappyKitchensimage01 },
-//   { id: 2, image: HappyKitchensimage02 },
-//   { id: 3, image: HappyKitchensimage03 },
-//   { id: 4, image: HappyKitchensimage04 },
-//   { id: 5, image: HappyKitchensimage05 },
-// ];
 
 const KitchenInterior: React.FC = () => {
   return (

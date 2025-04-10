@@ -1,7 +1,6 @@
 import { Menu, ChevronDown, ChevronUp } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import Logo from "../assets/logo.png";
-//import SearchIcon from "../assets/search_icon.svg";
 import UserIcon from "../assets/user_icon.svg";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -15,10 +14,9 @@ interface Category {
 
 const fetchProducts = async () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
-  // console.log(backendUrl, "backendUrl")
   const response = await fetch(`${backendUrl}/store/product-categories`, {
     headers: {
-      "x-publishable-api-key": import.meta.env.VITE_API_KEY, // ✅ Use environment variable
+      "x-publishable-api-key": import.meta.env.VITE_API_KEY,
       "Content-Type": "application/json",
     },
   });
@@ -106,11 +104,6 @@ const NavBar = () => {
       </div>
 
       <div className="flex items-center gap-5 md:gap-10">
-        {/* <Link to="/search" className="flex items-center">
-          <button>
-            <img src={SearchIcon} width={18} height={18} alt="Search Icon" />
-          </button>
-        </Link> */}
         <button>
           <img src={UserIcon} width={16} height={16} alt="User Icon" />
         </button>

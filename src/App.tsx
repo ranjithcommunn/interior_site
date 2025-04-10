@@ -7,14 +7,6 @@ import Footer from "./Components/Footer";
 import ProductViewPage from "./Pages/ProductViewPage";
 import KitchenInterior from "./Pages/KitchenInterior";
 import ContactUs from "./Pages/ContactUs";
-// import LivingRoutes from "./routes/LivingRoutes";
-// import StorageRoutes from "./routes/StorageRoutes";
-// import DiningRoutes from "./routes/DiningRoutes";
-// import BedroomRouter from "./routes/BedroomRoutes";
-// import MatressRouter from "./routes/MatressRoutes";
-// import OfficeRouter from "./routes/OfficeRoutes";
-// import OutdoorRouter from "./routes/OutdoorRoute";
-// import StudyRouter from "./routes/StudyRoutes";
 import { QueryClient } from "@tanstack/react-query";
 import CategoryPage from "./Components/Categories/CategoryPage";
 
@@ -28,17 +20,9 @@ const App = () => (
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/product/:id" element={<ProductViewPage />} />
+        <Route path="/product/:product_id" element={<ProductViewPage />} />
         <Route path="/kitchen-interior" element={<KitchenInterior />} />
         <Route path="/contact-us" element={<ContactUs />} />
-        {/* <Route path="/living/*" element={<LivingRoutes />} />
-        <Route path="/storage/*" element={<StorageRoutes />} />
-        <Route path="/dining/*" element={<DiningRoutes />} />
-        <Route path="/bedroom/*" element={<BedroomRouter />} />
-        <Route path="/matress/*" element={<MatressRouter />} />
-        <Route path="/office/*" element={<OfficeRouter />} />
-        <Route path="/outdoor/*" element={<OutdoorRouter />} />
-        <Route path="/study/*" element={<StudyRouter />} /> */}
         <Route path="/:category" element={<CategoryPage />} />
         <Route path="/:category/:subCategory/:category_id" element={<CategoryPage />} />
       </Routes>

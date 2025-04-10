@@ -30,13 +30,13 @@ const EnquireNowBtn = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: "" })); // Clear errors on input change
+    setErrors((prev) => ({ ...prev, [name]: "" }))
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Validation
+
     const newErrors = {
       name: formData.name ? "" : "Name is required",
       phone: formData.phone ? "" : "Phone number is required",
@@ -45,18 +45,16 @@ const EnquireNowBtn = () => {
 
     setErrors(newErrors);
 
-    // Check if there are any errors
+  
     if (Object.values(newErrors).some((error) => error !== "")) {
-      return; // Stop form submission if there are errors
+      return; 
     }
 
     console.log("Form Submitted:", formData);
 
-    // Close the dialog after submission
+   
     handleDialogClose();
 
-    // Add API call logic here
-    // sendFormDataToBackend(formData);
   };
 
   return (

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import TrendingProductsIcon from "../assets/TrendingProducts.png";
 import EnquireNowBtn from "./EnquireNowBtn";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -15,7 +16,7 @@ export interface ProductOptionValue {
   created_at: string;
   updated_at: string;
   deleted_at: string | null;
-  option?: ProductOption; // nested when inside variant
+  option?: ProductOption; 
 }
 
 export interface ProductOption {
@@ -93,8 +94,7 @@ export interface Product {
 
 const TrendingProducts: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
-
-  // console.log(products, "products");
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -153,6 +153,7 @@ const TrendingProducts: React.FC = () => {
               ease: "easeOut",
             }}
             whileHover={{ scale: 1.05 }}
+            onClick={() => navigate(`/product/${product.id}`)}
           >
             {/* Product Image */}
             <motion.img

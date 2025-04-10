@@ -4,13 +4,12 @@ import InstagramIcon from "../assets/InstagramIcon.png";
 import LinkedinIcon from "../assets/LinkedInIcon.png";
 import FooterImage from "../assets/footer_image01.png";
 
-// Define a type for footer items
 interface FooterItem {
   id: number;
   title: string;
 }
 
-// Footer items array
+
 const footerItems: FooterItem[] = [
   { id: 1, title: "Home" },
   { id: 2, title: "Living" },

@@ -1,11 +1,10 @@
 import React from "react";
-import { motion } from "framer-motion"; // Import Framer Motion
+import { motion } from "framer-motion"; 
 import SegmentsIcon from "../assets/Segments.png";
 import ResidentialImage from "../assets/Residential.png";
 import InstitutionalImage from "../assets/Institutional.png";
 import CommercialImage from "../assets/Commercial.png";
 
-// Define the type for the segment data
 interface Segment {
   id: number;
   name: string;
@@ -13,7 +12,7 @@ interface Segment {
 }
 
 const Segments: React.FC = () => {
-  // Segments list with type definition
+
   const SegmentsList: Segment[] = [
     { id: 1, name: "Residential", imageUrl: ResidentialImage },
     { id: 2, name: "Institutional", imageUrl: InstitutionalImage },
@@ -23,9 +22,9 @@ const Segments: React.FC = () => {
   return (
     <motion.section
       className="px-5 md:px-20 my-10"
-      initial={{ opacity: 0, y: 50 }} // Initial state: fade in from below
-      animate={{ opacity: 1, y: 0 }} // Final state: fully visible
-      transition={{ duration: 0.8, ease: "easeOut" }} // Smooth transition
+      initial={{ opacity: 0, y: 50 }} 
+      animate={{ opacity: 1, y: 0 }} 
+      transition={{ duration: 0.8, ease: "easeOut" }} 
     >
       {/* Header */}
       <motion.div

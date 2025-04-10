@@ -32,7 +32,7 @@ const categoriesList: Category[] = [
   { id: 8, name: "Matress", image_Url: Matress },
 ];
 
-// Custom Left Arrow
+
 const CustomPrevArrow: React.FC<{ onClick?: React.MouseEventHandler<HTMLButtonElement> }> = ({ onClick }) => {
   return (
     <button className="custom-arrow custom-prev-arrow" onClick={onClick}>
@@ -60,21 +60,21 @@ const settings: Settings = {
   nextArrow: <CustomNextArrow />,
   responsive: [
     {
-      breakpoint: 1024, // Tablet and smaller
+      breakpoint: 1024,  
       settings: {
         slidesToShow: 3,
         slidesToScroll: 1,
       },
     },
     {
-      breakpoint: 768, // Mobile landscape and smaller
+      breakpoint: 768, 
       settings: {
         slidesToShow: 2,
         slidesToScroll: 1,
       },
     },
     {
-      breakpoint: 480, // Mobile portrait and smaller
+      breakpoint: 480, 
       settings: {
         slidesToShow: 2,
         slidesToScroll: 1,
@@ -87,8 +87,8 @@ const ProductCategories: React.FC = () => {
   return (
     <motion.section
       className="flex items-center flex-col px-5 md:px-20 relative my-10"
-      initial={{ opacity: 0, y: 50 }} // Section starts hidden and slides up
-      animate={{ opacity: 1, y: 0 }} // Fades in and slides into position
+      initial={{ opacity: 0, y: 50 }} 
+      animate={{ opacity: 1, y: 0 }} 
       transition={{ duration: 1, ease: "easeOut" }}
     >
       <h1 className="text-xl md:text-3xl font-bold my-5 font-Poppins">Product Categories</h1>
@@ -98,9 +98,9 @@ const ProductCategories: React.FC = () => {
             <motion.div
               key={category.id}
               className="bg-[#D3D3D3] rounded-md p-6 flex items-center justify-center flex-col h-52 mx-2 gap-5"
-              initial={{ opacity: 0, scale: 0.8 }} // Start smaller and invisible
-              whileInView={{ opacity: 1, scale: 1 }} // Animate when in view
-              viewport={{ once: true, amount: 0.5 }} // Trigger once when 50% visible
+              initial={{ opacity: 0, scale: 0.8 }} 
+              whileInView={{ opacity: 1, scale: 1 }} 
+              viewport={{ once: true, amount: 0.5 }} 
               transition={{
                 duration: 0.5,
                 ease: "easeOut",
@@ -111,7 +111,7 @@ const ProductCategories: React.FC = () => {
                 src={category.image_Url}
                 alt={category.name}
                 className="h-[103px] w-[103px]  object-contain"
-                whileHover={{ scale: 1.1 }} // Slight zoom on hover
+                whileHover={{ scale: 1.1 }} 
                 transition={{ duration: 0.2 }}
               />
             </motion.div>

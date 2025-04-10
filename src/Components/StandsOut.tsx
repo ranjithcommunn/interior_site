@@ -5,7 +5,7 @@ import StandOurImage3 from "../assets/standout_image03.png";
 import StandOurImage4 from "../assets/standout_image04.png";
 import { motion } from "framer-motion";
 
-// Define the type for the standOutList items
+
 interface StandOutItem {
   id: number;
   title: string;
@@ -13,7 +13,7 @@ interface StandOutItem {
   image: string;
 }
 
-// Define the list of items with the type
+
 const standOutList: StandOutItem[] = [
   {
     id: 1,
@@ -42,7 +42,6 @@ const standOutList: StandOutItem[] = [
 ];
 
 const StandsOut: React.FC = () => {
-  // Animation variants for each item
   const itemVariant = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },

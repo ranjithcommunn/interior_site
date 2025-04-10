@@ -5,14 +5,14 @@ import AboutUsImage3 from "../assets/aboutus_image03.avif";
 import AboutUsImage4 from "../assets/aboutus_image04.avif";
 import { motion } from "framer-motion";
 
-// Define a type for the content items
+
 interface ContentItem {
   title: string;
   description: string;
 }
 
 const AboutUs: React.FC = () => {
-  // Animation Variants
+  
   const textVariant = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
@@ -28,7 +28,6 @@ const AboutUs: React.FC = () => {
     visible: { opacity: 1, x: 0, transition: { duration: 0.8 } },
   };
 
-  // Array of content items
   const contentItems: ContentItem[] = [
     {
       title: "Inspired Living",
@@ -100,9 +99,7 @@ const AboutUs: React.FC = () => {
           ))}
         </div>
 
-        {/* Right Side: Images with Different Sizes */}
         <div className="grid grid-cols-2 gap-6">
-          {/* Image 1: Full size */}
           <motion.div
             variants={imageVariant}
             initial="hidden"
@@ -116,7 +113,6 @@ const AboutUs: React.FC = () => {
             />
           </motion.div>
 
-          {/* Image 2: Smaller height, spans one column */}
           <motion.div
             className="row-span-2"
             variants={imageVariant}
@@ -131,7 +127,6 @@ const AboutUs: React.FC = () => {
             />
           </motion.div>
 
-          {/* Image 3: Taller height, spans two rows */}
           <motion.div
             className="row-span-2"
             variants={imageVariant}
@@ -146,7 +141,6 @@ const AboutUs: React.FC = () => {
             />
           </motion.div>
 
-          {/* Image 4: Medium height */}
           <motion.div
             variants={imageVariant}
             initial="hidden"

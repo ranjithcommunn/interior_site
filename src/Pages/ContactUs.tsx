@@ -66,7 +66,6 @@ const ContactUs: React.FC = () => {
     e.preventDefault();
     if (validateForm()) {
       console.log("Form Submitted", formData);
-      // Add API call logic here
       setFormData({
         name: "",
         phone: "",

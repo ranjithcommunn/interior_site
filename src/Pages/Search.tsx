@@ -18,10 +18,10 @@ import SearchImage09 from "../assets/search_Image09.png";
 import SearchSection02Image01 from "../assets/search_section02_image01.png";
 import SearchSection02Image02 from "../assets/search_section02_image02.png";
 import SearchSection02Image03 from "../assets/Luxury_Bed_Set.png";
-import "swiper/swiper-bundle.css"; // For Swiper 6 and above
+import "swiper/swiper-bundle.css"; 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import { motion } from "framer-motion"; // Import motion
+import { motion } from "framer-motion"; 
 import EnquireNowBtn from "@/Components/EnquireNowBtn";
 import { Link } from "react-router-dom";
 
@@ -426,7 +426,7 @@ const Search: React.FC = () => {
             >
               {BestsellersList.map((item, index) => (
                 <SwiperSlide key={index}>
-                  <div className="p-4 border rounded-lg bg-white shadow md:h-[342px] text-center flex flex-col items-center">
+                  <div className="p-4 border rounded-lg bg-white shadow md:min-h-[325px] text-center flex flex-col items-center">
                     <img
                       src={item.imageUrl}
                       alt={item.title}

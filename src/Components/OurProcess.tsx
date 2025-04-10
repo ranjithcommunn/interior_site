@@ -7,7 +7,6 @@ import ourProcessImage5 from "../assets/ourprocess_image05.png";
 import ourProcessImage6 from "../assets/ourprocess_image06.png";
 import { motion } from "framer-motion";
 
-// Define the type for the process data
 interface Process {
   id: number;
   title: string;
@@ -15,7 +14,6 @@ interface Process {
   image: string;
 }
 
-// Our process steps data
 const ourprocess: Process[] = [
   {
     id: 1,
@@ -56,7 +54,6 @@ const ourprocess: Process[] = [
 ];
 
 const OurProcess: React.FC = () => {
-  // Animation variants
   const processVariant = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
