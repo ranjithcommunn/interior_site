@@ -19,7 +19,7 @@ import { QueryClient } from "@tanstack/react-query";
 import CategoryPage from "./Components/Categories/CategoryPage";
 
 const queryClient = new QueryClient();
-const BASE_URL = "http://localhost:9000"; // Medusa backend URL
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const App = () => (
   <MedusaProvider baseUrl={BASE_URL} queryClientProviderProps={{ client: queryClient }} publishableApiKey={import.meta.env.VITE_APP_MEDUSA_API_KEY}>
@@ -28,7 +28,7 @@ const App = () => (
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/product" element={<ProductViewPage />} />
+        <Route path="/product/:id" element={<ProductViewPage />} />
         <Route path="/kitchen-interior" element={<KitchenInterior />} />
         <Route path="/contact-us" element={<ContactUs />} />
         {/* <Route path="/living/*" element={<LivingRoutes />} />

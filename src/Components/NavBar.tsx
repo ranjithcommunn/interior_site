@@ -14,7 +14,9 @@ interface Category {
 }
 
 const fetchProducts = async () => {
-  const response = await fetch("http://localhost:9000/store/product-categories", {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  // console.log(backendUrl, "backendUrl")
+  const response = await fetch(`${backendUrl}/store/product-categories`, {
     headers: {
       "x-publishable-api-key": import.meta.env.VITE_API_KEY, // ✅ Use environment variable
       "Content-Type": "application/json",
@@ -75,7 +77,7 @@ const NavBar = () => {
                   {item.name}
                   {activeDropdown === item.id ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </button>
-  
+
                 {activeDropdown === item.id && (
                   <div className="absolute left-0 bg-white w-40 min-w-fit mt-2 rounded-md shadow-lg z-10">
                     <ul className="space-y-1 p-2">

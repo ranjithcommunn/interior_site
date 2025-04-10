@@ -7,7 +7,6 @@ import {
   ChevronRight,
   ChevronUp,
 } from "lucide-react";
-
 import SearchSection02Image01 from "../../assets/search_section02_image01.png";
 import SearchSection02Image02 from "../../assets/search_section02_image02.png";
 import SearchSection02Image03 from "../../assets/Luxury_Bed_Set.png";
@@ -27,7 +26,7 @@ interface Product {
   thumbnail: string;
 }
 const fetchCategoryProducts = async (category_id: string | undefined) => {
-  const url = `http://localhost:9000/store/products?category_id=${category_id}`;
+  const url = `${import.meta.env.VITE_BACKEND_URL}/store/products?category_id=${category_id}`;
 
   const response = await fetch(url, {
     headers: {
@@ -42,7 +41,7 @@ const fetchCategoryProducts = async (category_id: string | undefined) => {
 
 const fetchProducts = async () => {
   const response = await fetch(
-    "http://localhost:9000/store/product-categories",
+    `${import.meta.env.VITE_BACKEND_URL}/store/product-categories`,
     {
       headers: {
         "x-publishable-api-key": import.meta.env.VITE_API_KEY, // ✅ Use environment variable
@@ -165,9 +164,8 @@ const CategoryPage = () => {
               {menuList?.map((item, index) => (
                 <li key={index} className="mb-2">
                   <div
-                    className={`flex items-center justify-between cursor-pointer ${
-                      item.category_children ? "" : "hover:text-black"
-                    }`}
+                    className={`flex items-center justify-between cursor-pointer ${item.category_children ? "" : "hover:text-black"
+                      }`}
                     onClick={() =>
                       item.category_children
                         ? toggleMobileCategory(item.name)
@@ -216,9 +214,8 @@ const CategoryPage = () => {
             {menuList?.map((item, index) => (
               <li key={index} className="mb-4">
                 <div
-                  className={`flex items-center justify-between py-3 cursor-pointer ${
-                    item.category_children ? "" : "hover:text-black"
-                  }`}
+                  className={`flex items-center justify-between py-3 cursor-pointer ${item.category_children ? "" : "hover:text-black"
+                    }`}
                   onClick={() => item.category_children && toggleMenu(index)}
                 >
                   <Link to={item.handle}>
@@ -313,18 +310,16 @@ const CategoryPage = () => {
           <div className="relative w-full p-5">
             {/* Custom Navigation Buttons */}
             <button
-              className={`custom-prev absolute top-1/2 -left-6 z-10 transform -translate-y-1/2 text-black p-2 rounded-full ${
-                isBeginning ? "opacity-0" : ""
-              }`}
+              className={`custom-prev absolute top-1/2 -left-6 z-10 transform -translate-y-1/2 text-black p-2 rounded-full ${isBeginning ? "opacity-0" : ""
+                }`}
               aria-label="Previous"
               disabled={isBeginning}
             >
               <ChevronLeft size={20} />
             </button>
             <button
-              className={`custom-next absolute top-1/2 -right-6 z-10 transform -translate-y-1/2 text-black p-2 rounded-full ${
-                isEnd ? "opacity-0" : ""
-              }`}
+              className={`custom-next absolute top-1/2 -right-6 z-10 transform -translate-y-1/2 text-black p-2 rounded-full ${isEnd ? "opacity-0" : ""
+                }`}
               aria-label="Next"
               disabled={isEnd}
             >

@@ -1,20 +1,109 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Product } from "@medusajs/medusa";
 import TrendingProductsIcon from "../assets/TrendingProducts.png";
 import EnquireNowBtn from "./EnquireNowBtn";
 import axios from "axios";
-import { BackendURL } from "@/config/config";
+
+
+
+
+export interface ProductOptionValue {
+  id: string;
+  value: string;
+
+  option_id: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+  option?: ProductOption; // nested when inside variant
+}
+
+export interface ProductOption {
+  id: string;
+  title: string;
+  product_id: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+  values?: ProductOptionValue[];
+}
+
+export interface ProductImage {
+  id: string;
+  url: string;
+  rank: number;
+  product_id: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+}
+
+export interface ProductVariant {
+  id: string;
+  title: string;
+  sku: string | null;
+  barcode: string | null;
+  ean: string | null;
+  upc: string | null;
+  allow_backorder: boolean;
+  manage_inventory: boolean;
+  hs_code: string | null;
+  origin_country: string | null;
+  mid_code: string | null;
+  material: string | null;
+  weight: number | null;
+  length: number | null;
+  height: number | null;
+  width: number | null;
+  variant_rank: number;
+  product_id: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+  options: ProductOptionValue[];
+}
+
+export interface Product {
+  id: string;
+  title: string;
+  subtitle: string | null;
+  description: string;
+  handle: string;
+  is_giftcard: boolean;
+  discountable: boolean;
+  thumbnail: string;
+  collection_id: string | null;
+  type_id: string | null;
+  weight: number | null;
+  length: number | null;
+  height: number | null;
+  width: number | null;
+  hs_code: string | null;
+  origin_country: string | null;
+  mid_code: string | null;
+  material: string | null;
+  created_at: string;
+  updated_at: string;
+  options: ProductOption[];
+  images: ProductImage[];
+  variants: ProductVariant[];
+}
+
+
 
 const TrendingProducts: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
+  // console.log(products, "products");
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${BackendURL}/store/products`, {
+        const backendUrl = import.meta.env.VITE_BACKEND_URL;
+        const response = await axios.get(`${backendUrl}/store/products`, {
           headers: {
-            "x-publishable-api-key": 'pk_21d2425416a482a0021c5e16f30a21cad28f320cfb33ae3f5e004820b6926751',
+            "x-publishable-api-key": import.meta.env.VITE_API_KEY,
+            "Content-Type": "application/json",
           },
         });
         setProducts(response.data.products);
