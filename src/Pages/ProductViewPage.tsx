@@ -33,7 +33,9 @@ const fetchProductsInfo = async (product_id: string | undefined) => {
   return response.json();
 };
 
-const fetchRelatedProducts = async (collection_id: string | null | undefined) => {
+const fetchRelatedProducts = async (
+  collection_id: string | null | undefined
+) => {
   if (!collection_id) {
     return { products: [] };
   }
@@ -55,7 +57,7 @@ const fetchRelatedProducts = async (collection_id: string | null | undefined) =>
 };
 
 const ProductViewPage: React.FC = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { product_id } = useParams<{
     product_id?: string;
   }>();
@@ -190,22 +192,48 @@ const ProductViewPage: React.FC = () => {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.5 + index * 0.2 }}
-                className="bg-[#D3D3D3] flex flex-col items-center max-w-fit box-border rounded-xl max-h-[352px] cursor-pointer"
+                className="bg-[#D3D3D3] flex flex-col items-center max-w-fit box-border rounded-xl max-h-[352px] cursor-pointer mt-3"
                 onClick={() => {
-                  navigate(`/product/${item.id}`)
+                  navigate(`/product/${item.id}`);
                 }}
               >
-                <img
+                {/* <img
                   src={item.thumbnail}
                   alt={item.title}
                   style={{
                     maxWidth: "100%",
-                    maxHeight: "200px",
-                    objectFit: "cover",
+                    maxHeight: "100%",
+                    objectFit: "contain",
                     borderTopLeftRadius: "12px",
                     borderTopRightRadius: "12px",
                   }}
-                />
+                /> */}
+                <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                  style={{
+                    minWidth: "340px",
+                    height: "300px",
+                    overflow: "hidden",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: "#f5f5f5",
+                    borderTopLeftRadius:"12px",
+                    borderTopRightRadius:"12px"
+                  }}
+                >
+                  <img
+                    src={item.thumbnail}
+                    alt={item.title}
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: "100%",
+                      objectFit: "contain",
+                    }}
+                  />
+                </motion.div>
                 <div className="w-full text-center px-4 py-6 flex flex-col items-center justify-center">
                   <h4 className="font-bold text-md md:text-xl mb-3">
                     {item.title}
@@ -215,7 +243,7 @@ const ProductViewPage: React.FC = () => {
                     whileTap={{ scale: 0.95 }}
                     className="bg-black text-white rounded-md w-full p-2 md:text-button2 md:leading-button2"
                     onClick={() => {
-                      navigate(`/product/${item.id}`)
+                      navigate(`/product/${item.id}`);
                     }}
                   >
                     View Details
