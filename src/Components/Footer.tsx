@@ -3,29 +3,52 @@ import logo from "../assets/logo.png";
 import InstagramIcon from "../assets/InstagramIcon.png";
 import LinkedinIcon from "../assets/LinkedInIcon.png";
 import FooterImage from "../assets/footer_image01.png";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom"; // Import Link for navigation
 
-interface FooterItem {
+interface Category {
   id: number;
-  title: string;
+  name: string;
+  handle: string | null;
+  parent_category_id: string | null; // Corrected type to allow null
+  category_children: Category[];
 }
 
+const fetchProductCategories = async () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const response = await fetch(`${backendUrl}/store/product-categories`, {
+    headers: {
+      "x-publishable-api-key": import.meta.env.VITE_API_KEY,
+      "Content-Type": "application/json",
+    },
+  });
 
-const footerItems: FooterItem[] = [
-  { id: 1, title: "Home" },
-  { id: 2, title: "Living" },
-  { id: 3, title: "Storage" },
-  { id: 4, title: "Dining" },
-  { id: 5, title: "Bedroom" },
-  { id: 6, title: "Mattress" },
-  { id: 7, title: "Study" },
-  { id: 8, title: "Office" },
-  { id: 9, title: "Outdoor" },
-  { id: 10, title: "Residential" },
-  { id: 11, title: "Institutional" },
-  { id: 12, title: "Commercial" },
-];
+  if (!response.ok) {
+    console.error("Failed to fetch product categories:", response.status);
+    throw new Error("Failed to fetch product categories.");
+  }
+  return response.json();
+};
 
 const Footer: React.FC = () => {
+  const { data: menuData, error: menuError } = useQuery<{
+    product_categories: Category[];
+  }>(["productCategories"], fetchProductCategories);
+
+  if (menuError) {
+    return <p>Error loading category menu.</p>;
+  }
+
+  console.log(menuData);
+  const menuList = menuData?.product_categories.filter(
+    (cat) =>
+      cat.category_children?.length > 0 || cat.parent_category_id === null
+  );
+
+  console.log(menuList);
+
+  console.log(menuList, "menulist");
+
   return (
     <footer className="bg-black text-white p-5 md:px-20">
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-80 mt-10">
@@ -60,20 +83,32 @@ const Footer: React.FC = () => {
 
         {/* Right Section */}
         <div className="flex flex-col h-[340px] flex-wrap mt-10 md:mt-0">
-          {footerItems.map((item) => (
-            <a
+          {menuList?.map((item) => (
+            <Link
               key={item.id}
-              href={`#${item.title.toLowerCase()}`}
+              to={
+                item.category_children?.length > 0
+                  ? `/${item.handle}/${item.category_children[0].handle}/${item.category_children[0].id}`
+                  : `/${item.handle}/${item.id}`
+              }
               className="py-2 text-sm hover:text-gray-400 transition-colors font-DMSans"
             >
-              {item.title}
-            </a>
+              {item.name}
+            </Link>
           ))}
+          <Link
+            to="/contact-us"
+            className="py-2 text-sm hover:text-gray-400 transition-colors font-DMSans"
+          >
+            Contact Us
+          </Link>
         </div>
       </div>
       <hr />
       <div className="flex items-center flex-col">
-        <p className="text-xs py-3">2024 © All rights reserved - Cozy Comfort</p>
+        <p className="text-xs py-3">
+          2024 © All rights reserved - Cozy Comfort
+        </p>
         <img src={FooterImage} alt="Footer Decorative" />
       </div>
     </footer>

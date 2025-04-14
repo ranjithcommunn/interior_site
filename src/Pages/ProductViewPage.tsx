@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import designerProfile01 from "../assets/designer_Profile01.png";
 import EnquireNowBtn from "@/Components/EnquireNowBtn";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
@@ -40,7 +39,7 @@ const fetchRelatedProducts = async (
     return { products: [] };
   }
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
-  const url = `${backendUrl}/store/products?collection_id=${collection_id}`;
+  const url = `${backendUrl}/store/products?collection_id=${collection_id}&limit=9`;
 
   const response = await fetch(url, {
     headers: {
@@ -58,8 +57,10 @@ const fetchRelatedProducts = async (
 
 const ProductViewPage: React.FC = () => {
   const navigate = useNavigate();
-  const { product_id } = useParams<{
+  const { product_id, category, subCategory } = useParams<{
     product_id?: string;
+    category: string;
+    subCategory: string;
   }>();
 
   const { data, isLoading, error } = useQuery<{ product: Product }>(
@@ -67,6 +68,8 @@ const ProductViewPage: React.FC = () => {
     () => fetchProductsInfo(product_id),
     { enabled: !!product_id }
   );
+
+  console.log(data);
 
   const collection_id = data?.product?.collection_id;
 
@@ -137,12 +140,12 @@ const ProductViewPage: React.FC = () => {
               {data?.product?.title}
             </h3>
             <div className="flex items-center gap-3 mt-4">
-              <div className="rounded-full">
+              {/* <div className="rounded-full">
                 <img src={designerProfile01} alt="profile" />
-              </div>
+              </div> */}
               <div>
-                <p className="text-xs">Designer</p>
-                <p className="text-base">LuxuryLiving123</p>
+                <p className="text-xs">{subCategory}</p>
+                <p className="text-base capitalize">{category}</p>
               </div>
             </div>
           </motion.div>
@@ -197,17 +200,6 @@ const ProductViewPage: React.FC = () => {
                   navigate(`/product/${item.id}`);
                 }}
               >
-                {/* <img
-                  src={item.thumbnail}
-                  alt={item.title}
-                  style={{
-                    maxWidth: "100%",
-                    maxHeight: "100%",
-                    objectFit: "contain",
-                    borderTopLeftRadius: "12px",
-                    borderTopRightRadius: "12px",
-                  }}
-                /> */}
                 <motion.div
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -220,8 +212,8 @@ const ProductViewPage: React.FC = () => {
                     alignItems: "center",
                     justifyContent: "center",
                     backgroundColor: "#f5f5f5",
-                    borderTopLeftRadius:"12px",
-                    borderTopRightRadius:"12px"
+                    borderTopLeftRadius: "12px",
+                    borderTopRightRadius: "12px",
                   }}
                 >
                   <img

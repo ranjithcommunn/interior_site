@@ -63,10 +63,10 @@ const fetchProductCategories = async () => {
 interface Category {
   id: number;
   name: string;
-  handle: string;
-  category_children?: Category[];
+  handle: string | null;
+  parent_category_id: string | null;
+  category_children: Category[];
 }
-
 interface Bestseller {
   id: number;
   title: string;
@@ -87,18 +87,17 @@ const CategoryPage = () => {
     isLoading: categoryProductsLoading,
     error: categoryProductsError,
   } = useQuery<{ products: Product[] }>(
-    ["categoryProducts", category_id], 
+    ["categoryProducts", category_id],
     () => fetchCategoryProducts(category_id),
     { enabled: !!category_id }
   );
 
-  
   const {
     data: menuData,
     isLoading: menuLoading,
     error: menuError,
   } = useQuery<{ product_categories: Category[] }>(
-    ["productCategories"], 
+    ["productCategories"],
     fetchProductCategories
   );
 
@@ -112,7 +111,6 @@ const CategoryPage = () => {
 
   const navigate = useNavigate();
 
-  
   if (categoryProductsLoading || menuLoading) {
     return (
       <div className="w-full flex justify-center items-center h-[80vh]">
@@ -125,17 +123,15 @@ const CategoryPage = () => {
     return <p>Error loading products for this category.</p>;
   }
 
- 
   if (menuError) {
     return <p>Error loading category menu.</p>;
   }
 
-  
   const menuList = menuData?.product_categories.filter(
-    (cat) => cat.category_children?.length
+    (cat) =>
+      cat.category_children?.length > 0 || cat.parent_category_id === null
   );
 
- 
   const toggleMenu = (index: number) => {
     setExpandedMenus((prev) => ({
       ...prev,
@@ -143,17 +139,14 @@ const CategoryPage = () => {
     }));
   };
 
-  
   const toggleMobileCategory = (catName: string) => {
     setMobileCategory((prev) => (prev === catName ? null : catName));
   };
 
-  
   function formatProductName(productName: string): string {
     return productName.replace(/-/g, " ");
   }
 
-  
   const BestsellersList: Bestseller[] = [
     {
       id: 1,
@@ -209,10 +202,10 @@ const CategoryPage = () => {
                     aria-expanded={mobileCategory === item.name}
                     aria-controls={`mobile-subcategory-list-${item.id}`}
                   >
-                    <Link to={`/${item.handle}`}>
+                    <Link to={``}>
                       <p className="text-text1 leading-text1">{item.name}</p>
                     </Link>
-                    {item.category_children &&
+                    {item.category_children.length > 0 &&
                       (mobileCategory === item.name ? (
                         <ChevronUp size={16} />
                       ) : (
@@ -266,10 +259,16 @@ const CategoryPage = () => {
                   aria-expanded={!!expandedMenus[index]}
                   aria-controls={`desktop-subcategory-list-${item.id}`}
                 >
-                  <Link to={`/${item.handle}`}>
+                  <Link
+                    to={
+                      item.category_children?.length > 0
+                        ? `/${item.handle}/${item.category_children[0].handle}/${item.category_children[0].id}`
+                        : `/${item.handle}/${item.id}`
+                    }
+                  >
                     <p className="text-text1 leading-text1">{item.name}</p>
                   </Link>
-                  {item.category_children &&
+                  {item.category_children.length > 0 &&
                     (expandedMenus[index] ? (
                       <ChevronUp size={16} />
                     ) : (
@@ -321,7 +320,11 @@ const CategoryPage = () => {
                     duration: 0.5,
                     ease: "easeOut",
                   }}
-                  onClick={() => navigate(`/product/${product.id}`)}
+                  onClick={() =>
+                    navigate(
+                      `/product/${subCategory}/${category}/${product.id}`
+                    )
+                  }
                 >
                   <img
                     src={product.thumbnail}

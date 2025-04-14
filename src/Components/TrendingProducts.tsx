@@ -5,9 +5,6 @@ import EnquireNowBtn from "./EnquireNowBtn";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
-
-
 export interface ProductOptionValue {
   id: string;
   value: string;
@@ -16,7 +13,7 @@ export interface ProductOptionValue {
   created_at: string;
   updated_at: string;
   deleted_at: string | null;
-  option?: ProductOption; 
+  option?: ProductOption;
 }
 
 export interface ProductOption {
@@ -90,22 +87,23 @@ export interface Product {
   variants: ProductVariant[];
 }
 
-
-
 const TrendingProducts: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const backendUrl = import.meta.env.VITE_BACKEND_URL;
-        const response = await axios.get(`${backendUrl}/store/products`, {
-          headers: {
-            "x-publishable-api-key": import.meta.env.VITE_API_KEY,
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await axios.get(
+          `${backendUrl}/store/products?limit=12`,
+          {
+            headers: {
+              "x-publishable-api-key": import.meta.env.VITE_API_KEY,
+              "Content-Type": "application/json",
+            },
+          }
+        );
         setProducts(response.data.products);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -113,7 +111,6 @@ const TrendingProducts: React.FC = () => {
     };
     fetchProducts();
   }, []);
-
 
   return (
     <motion.section
@@ -177,6 +174,17 @@ const TrendingProducts: React.FC = () => {
             </div>
           </motion.div>
         ))}
+      </div>
+
+      <div className="w-full flex items-center justify-center mt-4">
+        <button
+          className="bg-black text-white rounded-md w-fit p-2 md:text-button2 md:leading-button2 px-4 "
+          onClick={() => {
+            navigate(`/living/sofas/pcat_01JMM5XCCR5XDCDQ6Z0M1A9M0W`);
+          }}
+        >
+          View More
+        </button>
       </div>
     </motion.section>
   );

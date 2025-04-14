@@ -17,19 +17,22 @@ const contactData: ContactData[] = [
     id: 1,
     title: "Phone",
     icon: phoneIcon,
-    discription: "+91 90000 00000",
+    discription: "+91 95357 11662",
   },
   {
     id: 2,
     title: "Email",
     icon: EmailIcon,
-    discription: "contact@cozycomfort.com",
+    discription: "info@vibrer.co.in, sales@vibrer.co.in",
   },
   {
     id: 3,
     title: "Location",
     icon: LocationIcon,
-    discription: "Bangalore 560001",
+    discription: `M/s SREGA Electronics & Furniture LLP ,
+#3, Ground Floor, 5th Block, 10th F Main Rd,
+Jayanagar, 5th Block,
+Bengaluru - 560 041`,
   },
 ];
 
@@ -47,7 +50,9 @@ const ContactUs: React.FC = () => {
     email: false,
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -105,7 +110,9 @@ const ContactUs: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
         >
-          <h4 className="font-bold text-lg my-4 md:text-heading2 md:leading-heading2">Get In Touch</h4>
+          <h4 className="font-bold text-lg my-4 md:text-heading2 md:leading-heading2">
+            Get In Touch
+          </h4>
           <div className="flex flex-col items-center md:items-start md:text-left gap-4 md:gap-3">
             {contactData.map((item) => (
               <motion.div
@@ -116,20 +123,32 @@ const ContactUs: React.FC = () => {
               >
                 <div className="flex items-center gap-3">
                   <img src={item.icon} alt={item.title} />
-                  <h5 className="text-md font-bold md:text-heading3 md:leading-heading3">{item.title}</h5>
+                  <h5 className="text-md font-bold md:text-heading3 md:leading-heading3">
+                    {item.title}
+                  </h5>
                 </div>
-                <p className="text-gray-600 text-sm md:text-base">{item.discription}</p>
+                <p className="text-gray-600 text-sm md:text-base">
+                  {item.discription.split("\n").map((line, index, array) => (
+                    <React.Fragment key={index}>
+                      {line}
+                      {index < array.length - 1 && <br />}
+                    </React.Fragment>
+                  ))}
+                </p>
               </motion.div>
             ))}
           </div>
-          <div className="my-3 flex justify-center md:justify-start">
-            <motion.img
-              src={MapImage}
-              alt="map image"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
-            />
+          <div className="my-3 flex justify-center md:justify-start w-full md:w-1/2">
+           {/** google map */}
+           <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15554.169803816076!2d77.56556620025746!3d12.937102761135698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae159fe6a38b53%3A0x308f136a25add36d!2sPhilips%20Arena%20(Dilip%20Electronics)!5e0!3m2!1sen!2sin!4v1744635975571!5m2!1sen!2sin"
+              width="100%" // Make it responsive
+              height="300" // Adjust height as needed
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </motion.div>
 
@@ -140,40 +159,54 @@ const ContactUs: React.FC = () => {
           transition={{ duration: 1, delay: 0.5 }}
           onSubmit={handleSubmit}
         >
-          <h4 className="font-bold text-xl md:text-heading2 md:leading-heading2">Request a Call Back</h4>
+          <h4 className="font-bold text-xl md:text-heading2 md:leading-heading2">
+            Request a Call Back
+          </h4>
           <motion.input
             name="name"
             placeholder="Name"
             type="text"
             value={formData.name}
             onChange={handleInputChange}
-            className={`p-3 w-full rounded-lg my-2 ${errors.name ? "border-red-500 border" : ""}`}
+            className={`p-3 w-full rounded-lg my-2 ${
+              errors.name ? "border-red-500 border" : ""
+            }`}
             whileFocus={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           />
-          {errors.name && <p className="text-red-500 text-sm">Name is required.</p>}
+          {errors.name && (
+            <p className="text-red-500 text-sm">Name is required.</p>
+          )}
           <motion.input
             name="phone"
             placeholder="Phone Number"
             type="number"
             value={formData.phone}
             onChange={handleInputChange}
-            className={`p-3 w-full rounded-lg my-2 ${errors.phone ? "border-red-500 border" : ""}`}
+            className={`p-3 w-full rounded-lg my-2 ${
+              errors.phone ? "border-red-500 border" : ""
+            }`}
             whileFocus={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           />
-          {errors.phone && <p className="text-red-500 text-sm">Phone number is required.</p>}
+          {errors.phone && (
+            <p className="text-red-500 text-sm">Phone number is required.</p>
+          )}
           <motion.input
             name="email"
             placeholder="Email"
             type="email"
             value={formData.email}
             onChange={handleInputChange}
-            className={`p-3 w-full rounded-lg my-2 ${errors.email ? "border-red-500 border" : ""}`}
+            className={`p-3 w-full rounded-lg my-2 ${
+              errors.email ? "border-red-500 border" : ""
+            }`}
             whileFocus={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           />
-          {errors.email && <p className="text-red-500 text-sm">Email is required.</p>}
+          {errors.email && (
+            <p className="text-red-500 text-sm">Email is required.</p>
+          )}
           <motion.textarea
             name="message"
             rows={5}
