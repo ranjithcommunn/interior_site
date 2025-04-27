@@ -75,7 +75,6 @@ const ProductViewPage: React.FC = () => {
 
   const {
     data: relatedProductsData,
-    isLoading: relatedProductsLoading,
     error: relatedProductsError,
   } = useQuery<{ products: Product[] }>(
     ["relatedProducts", collection_id],
@@ -87,7 +86,7 @@ const ProductViewPage: React.FC = () => {
     (each) => each.id !== data?.product?.id
   );
 
-  if (isLoading || relatedProductsLoading) {
+  if (isLoading) {
     return (
       <div className="w-full flex justify-center items-center h-[80vh]">
         <MoonLoader />
@@ -248,7 +247,7 @@ const ProductViewPage: React.FC = () => {
       )}
 
       {/* Render "No related products" message if filteredData is empty */}
-      {filteredData?.length === 0 && (
+      {filteredData?.length === 0  && (
         <motion.section
           className="my-6 hidden md:block"
           initial={{ opacity: 0 }}

@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
             the go-to choice for those seeking premium furniture under one
             trusted brand.
           </p>
-          <div className="flex items-center mt-4 gap-5">
+          <div className="flex items-center my-4 gap-5">
             <a
               href="https://instagram.com"
               target="_blank"
