@@ -1,1 +1,1 @@
-export const BackendURL = "http://localhost:9000"
+export const BackendURL = "https://api.vibrer.co.in"
