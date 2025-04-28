@@ -69,7 +69,7 @@ const ProductViewPage: React.FC = () => {
     { enabled: !!product_id }
   );
 
-  console.log(data);
+  // console.log(data);
 
   const collection_id = data?.product?.collection_id;
 
@@ -107,7 +107,7 @@ const ProductViewPage: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
           style={{
-            minWidth: "fit-content",
+            minWidth: "400px",
             height: "300px",
             overflow: "hidden",
             display: "flex",
@@ -153,10 +153,11 @@ const ProductViewPage: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="md:w-[65%] text-base w-full"
+            className="w-[65%] text-base"
           >
             {data?.product?.description}
           </motion.p>
+
 
           <motion.div
             initial={{ opacity: 0 }}
@@ -247,7 +248,7 @@ const ProductViewPage: React.FC = () => {
       )}
 
       {/* Render "No related products" message if filteredData is empty */}
-      {filteredData?.length === 0  && (
+      {filteredData?.length === 0 && (
         <motion.section
           className="my-6 hidden md:block"
           initial={{ opacity: 0 }}

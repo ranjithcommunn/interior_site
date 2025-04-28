@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import phoneIcon from "../assets/phone_icon.svg";
 import EmailIcon from "../assets/mail_icon.svg";
 import LocationIcon from "../assets/location_icon.svg";
-import MapImage from "../assets/map_image.png";
+
 
 interface ContactData {
   id: number;
@@ -139,8 +139,8 @@ const ContactUs: React.FC = () => {
             ))}
           </div>
           <div className="my-3 flex justify-center md:justify-start w-full md:w-1/2">
-           {/** google map */}
-           <iframe
+            {/** google map */}
+            <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15554.169803816076!2d77.56556620025746!3d12.937102761135698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae159fe6a38b53%3A0x308f136a25add36d!2sPhilips%20Arena%20(Dilip%20Electronics)!5e0!3m2!1sen!2sin!4v1744635975571!5m2!1sen!2sin"
               width="100%" // Make it responsive
               height="300" // Adjust height as needed
@@ -168,9 +168,8 @@ const ContactUs: React.FC = () => {
             type="text"
             value={formData.name}
             onChange={handleInputChange}
-            className={`p-3 w-full rounded-lg my-2 ${
-              errors.name ? "border-red-500 border" : ""
-            }`}
+            className={`p-3 w-full rounded-lg my-2 ${errors.name ? "border-red-500 border" : ""
+              }`}
             whileFocus={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           />
@@ -183,9 +182,8 @@ const ContactUs: React.FC = () => {
             type="number"
             value={formData.phone}
             onChange={handleInputChange}
-            className={`p-3 w-full rounded-lg my-2 ${
-              errors.phone ? "border-red-500 border" : ""
-            }`}
+            className={`p-3 w-full rounded-lg my-2 ${errors.phone ? "border-red-500 border" : ""
+              }`}
             whileFocus={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           />
@@ -198,9 +196,8 @@ const ContactUs: React.FC = () => {
             type="email"
             value={formData.email}
             onChange={handleInputChange}
-            className={`p-3 w-full rounded-lg my-2 ${
-              errors.email ? "border-red-500 border" : ""
-            }`}
+            className={`p-3 w-full rounded-lg my-2 ${errors.email ? "border-red-500 border" : ""
+              }`}
             whileFocus={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           />
