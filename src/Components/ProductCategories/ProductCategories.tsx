@@ -99,7 +99,7 @@ const ProductCategories: React.FC = () => {
             <motion.a
               key={category.id}
               href={category.link}
-              className="bg-[#D3D3D3] rounded-md p-4 md:p-6 flex flex-col items-center justify-center h-48 md:h-52 mx-2 gap-4 md:gap-5"
+              className="bg-[#D3D3D3] rounded-md p-4 md:p-6 !flex flex-col items-center justify-center h-48 md:h-52 mx-2 gap-4 md:gap-5"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.5 }}
