@@ -12,7 +12,7 @@ const Home: React.FC = () => {
 
  
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <HeroSection />
       <ProductCategories />
       <Segments />

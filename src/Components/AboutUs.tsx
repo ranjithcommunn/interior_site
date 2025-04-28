@@ -99,7 +99,7 @@ const AboutUs: React.FC = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-2">
           <motion.div
             variants={imageVariant}
             initial="hidden"

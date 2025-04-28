@@ -69,7 +69,7 @@ const NavBar = () => {
   );
 
   return (
-    <nav className="bg-black flex items-center h-[72px] md:h-[115px] px-5 md:px-20 gap-10 justify-between">
+    <nav className="bg-black flex items-center h-[72px] md:h-[115px] px-5 md:px-20 gap-10 justify-between min-w-full">
       <div className="flex items-center gap-10 box-border">
         <Link to="/" className="flex items-center justify-center">
           <img

@@ -194,11 +194,14 @@ const CategoryPage = () => {
                     className={`flex items-center justify-between cursor-pointer ${
                       item.category_children ? "" : "hover:text-black"
                     }`}
-                    onClick={() =>
-                      item.category_children
-                        ? toggleMobileCategory(item.name)
-                        : navigate(`/${item.handle}`)
-                    }
+                    onClick={() => {
+                      if (item.category_children) {
+                        toggleMobileCategory(item.name);
+                      } else {
+                        navigate(`/${item.handle}`);
+                        setOpenMenu(false);
+                      }
+                    }}
                     aria-expanded={mobileCategory === item.name}
                     aria-controls={`mobile-subcategory-list-${item.id}`}
                   >
@@ -218,16 +221,16 @@ const CategoryPage = () => {
                       id={`mobile-subcategory-list-${item.id}`}
                     >
                       {item.category_children.map((subItem) => (
-                        <li
-                          key={subItem.id}
-                          className="py-1 text-sm text-gray-600 hover:text-black"
-                        >
-                          <Link
-                            to={`/${item.handle}/${subItem.handle}/${subItem.id}`}
-                          >
-                            {subItem.name}
-                          </Link>
-                        </li>
+                       <li
+                       key={subItem.id}
+                       className="py-1 text-sm text-gray-600 hover:text-black"
+                       onClick={() => {
+                         navigate(`/${item.handle}/${subItem.handle}/${subItem.id}`);
+                         setOpenMenu(false); 
+                       }}
+                     >
+                       {subItem.name}
+                     </li>
                       ))}
                     </ul>
                   )}
@@ -237,7 +240,6 @@ const CategoryPage = () => {
           )}
         </div>
       </div>
-
       <section className="flex items-start justify-between py-5 w-full md:px-8">
         {/* Desktop Sidebar for Sub-categories */}
         <div className="w-2/12 p-4 bg-white flex-0 hidden md:block min-w-fit">
@@ -308,7 +310,7 @@ const CategoryPage = () => {
 
           {categoryProductsData &&
           categoryProductsData?.products?.length > 0 ? (
-            <div className=" bg-white p-4 grid grid-cols-2 md:grid-cols-4 gap-10 flex-1 w-full">
+            <div className=" bg-white p-4 grid grid-cols-2 md:grid-cols-4 gap-6 flex-1 w-full">
               {categoryProductsData?.products.map((product, index) => (
                 <motion.div
                   key={product.id}

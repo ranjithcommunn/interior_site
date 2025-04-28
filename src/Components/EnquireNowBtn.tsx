@@ -59,7 +59,7 @@ const EnquireNowBtn = () => {
 
   return (
     <div>
-      <p onClick={() => setOpen(true)}>Enquire Now</p>
+      <p onClick={() => setOpen(true)} className="min-w-fit">Enquire Now</p>
       <AlertDialog open={open}>
         <AlertDialogContent>
           <AlertDialogHeader>

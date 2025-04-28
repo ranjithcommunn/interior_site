@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import TrendingProductsIcon from "../assets/TrendingProducts.png";
-import EnquireNowBtn from "./EnquireNowBtn";
+//import EnquireNowBtn from "./EnquireNowBtn";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -154,17 +154,17 @@ const TrendingProducts: React.FC = () => {
           >
             {/* Product Image */}
             <motion.img
-              src={product.thumbnail || "https://via.placeholder.com/150"}
-              alt={product.title}
-              className="w-full h-48 object-cover transition-opacity duration-300 group-hover:opacity-70"
-              whileHover={{ opacity: 0.8 }}
-              transition={{ duration: 0.3 }}
-            />
+  src={product.thumbnail || "https://via.placeholder.com/150"}
+  alt={product.title}
+  className="w-full h-auto md:max-h-44 aspect-video object-fit transition-opacity duration-300 group-hover:opacity-70"
+  whileHover={{ opacity: 0.8 }}
+  transition={{ duration: 0.3 }}
+/>
 
             {/* View More Button */}
-            <div className="absolute md:text-button2 md:leading-button2 font-Poppins top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black text-white text-[10px] md:text-base px-6 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-100">
+            {/* <div className="absolute md:text-button2 md:leading-button2 font-Poppins top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black text-white text-[10px] md:text-base px-6 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-100 min-w-fit">
               <EnquireNowBtn />
-            </div>
+            </div> */}
 
             {/* Product Name */}
             <div className="p-4">
