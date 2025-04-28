@@ -107,7 +107,7 @@ const ProductViewPage: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
           style={{
-            minWidth: "400px",
+            minWidth: "fit-content",
             height: "300px",
             overflow: "hidden",
             display: "flex",
@@ -153,7 +153,7 @@ const ProductViewPage: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="w-[65%] text-base"
+            className="md:w-[65%] text-base w-full"
           >
             {data?.product?.description}
           </motion.p>
