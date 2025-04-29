@@ -195,7 +195,7 @@ const ProductViewPage: React.FC = () => {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.5 + index * 0.2 }}
-                className="bg-[#D3D3D3] flex flex-col items-center max-w-fit box-border rounded-xl max-h-[352px] cursor-pointer mt-3"
+                className="bg-[#D3D3D3] flex flex-col items-center min-w-full max-w-fit box-border rounded-xl max-h-[352px] cursor-pointer mt-3 overflow-hidden"
                 onClick={() => {
                   navigate(`/product/${item.id}`);
                 }}
@@ -204,17 +204,7 @@ const ProductViewPage: React.FC = () => {
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5 }}
-                  style={{
-                    minWidth: "340px",
-                    height: "300px",
-                    overflow: "hidden",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: "#f5f5f5",
-                    borderTopLeftRadius: "12px",
-                    borderTopRightRadius: "12px",
-                  }}
+                  className="min-w-full h-[300px] overflow-hidden flex items-center justify-center bg-[#f5f5f5] rounded-tl-[12px] rounded-tr-[12px]"
                 >
                   <img
                     src={item.thumbnail}
