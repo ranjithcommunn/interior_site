@@ -433,10 +433,10 @@ const CategoryPage = () => {
                       alt={item.title}
                       className="w-full h-auto rounded object-cover"
                     />
-                    <p className="text-lg mt-4 bg-black text-white w-fit rounded-lg px-2 py-1">
+                    {/* <p className="text-lg mt-4 bg-black text-white w-fit rounded-lg px-2 py-1">
                       ${item.price}
-                    </p>
-                    <h3 className="text-lg text-center mt-2 md:text-heading3 md:leading-heading3">
+                    </p> */}
+                    <h3 className="text-lg text-center mt-auto md:text-heading3 md:leading-heading3">
                       {item.title}
                     </h3>
                     <p className="text-sm text-gray-600 mb-4">

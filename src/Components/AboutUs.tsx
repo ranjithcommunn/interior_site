@@ -1,8 +1,8 @@
 import React from "react";
 import AboutUsImage1 from "../assets/aboutus_image01.png";
 import AboutUsImage2 from "../assets/aboutus_image02.avif";
-import AboutUsImage3 from "../assets/aboutus_image03.avif";
-import AboutUsImage4 from "../assets/aboutus_image04.avif";
+import AboutUsImage3 from "../assets/aboutus_image03.png";
+import AboutUsImage4 from "../assets/aboutus_image04.png";
 import { motion } from "framer-motion";
 
 
