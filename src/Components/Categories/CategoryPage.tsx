@@ -8,9 +8,6 @@ import {
   ChevronUp,
 } from "lucide-react";
 
-import SearchSection02Image01 from "../../assets/search_section02_image01.png";
-import SearchSection02Image02 from "../../assets/search_section02_image02.png";
-import SearchSection02Image03 from "../../assets/Luxury_Bed_Set.png";
 import "swiper/swiper-bundle.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
@@ -66,13 +63,6 @@ interface Category {
   handle: string | null;
   parent_category_id: string | null;
   category_children: Category[];
-}
-interface Bestseller {
-  id: number;
-  title: string;
-  subtitle: string;
-  price: number;
-  imageUrl: string;
 }
 
 const CategoryPage = () => {
@@ -147,29 +137,13 @@ const CategoryPage = () => {
     return productName.replace(/-/g, " ");
   }
 
-  const BestsellersList: Bestseller[] = [
-    {
-      id: 1,
-      title: "Golden Vanity Desk",
-      subtitle: "Elegant and Functional",
-      price: 900,
-      imageUrl: SearchSection02Image01,
-    },
-    {
-      id: 2,
-      title: "Luxury Dining Chairs",
-      subtitle: "Comfortable and Stylish",
-      price: 900,
-      imageUrl: SearchSection02Image02,
-    },
-    {
-      id: 3,
-      title: "Luxury Bed Set",
-      subtitle: "Comfortable and Stylish",
-      price: 800,
-      imageUrl: SearchSection02Image03,
-    },
-  ];
+  const BestsellersProducts = [
+    categoryProductsData?.products[0],
+    categoryProductsData?.products[1],
+    categoryProductsData?.products[2]
+  ]
+
+
 
   return (
     <main className="flex-grow box-border font-Poppins">
@@ -342,7 +316,7 @@ const CategoryPage = () => {
                     whileTap={{ scale: 0.95 }}
                     className="bg-black text-white rounded-md w-fit p-2 md:text-button2 md:leading-button2 px-4"
                     onClick={() => {
-                      navigate(`/product/${product.id}`);
+                      navigate(`/product/${subCategory}/${category}/${product.id}`);
                     }}
                   >
                     View Details
@@ -425,24 +399,24 @@ const CategoryPage = () => {
                 setIsEnd(swiper.isEnd);
               }}
             >
-              {BestsellersList.map((item) => (
-                <SwiperSlide key={item.id}>
-                  <div className="p-4 border rounded-lg bg-white shadow md:min-h-[341px] text-center flex flex-col items-center">
+              {BestsellersProducts.map((item) => (
+                <SwiperSlide key={item?.id}>
+                  <a href={`/product/${subCategory}/${category}/${item?.id}`} className="p-4 border rounded-lg bg-white shadow md:min-h-[341px] text-center !flex flex-col justify-center items-center">
                     <img
-                      src={item.imageUrl}
-                      alt={item.title}
+                      src={item?.thumbnail}
+                      alt={item?.title}
                       className="w-full h-auto rounded object-cover"
                     />
                     {/* <p className="text-lg mt-4 bg-black text-white w-fit rounded-lg px-2 py-1">
                       ${item.price}
                     </p> */}
-                    <h3 className="text-lg text-center mt-auto md:text-heading3 md:leading-heading3">
-                      {item.title}
+                    <h3 className="text-lg text-center  md:text-heading3 md:leading-heading3">
+                      {item?.title}
                     </h3>
-                    <p className="text-sm text-gray-600 mb-4">
-                      {item.subtitle}
-                    </p>
-                  </div>
+                    {/* <p className="text-sm text-gray-600 mb-4">
+                      {item.}
+                    </p> */}
+                  </a>
                 </SwiperSlide>
               ))}
             </Swiper>
