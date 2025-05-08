@@ -141,7 +141,7 @@ const CategoryPage = () => {
     categoryProductsData?.products[0],
     categoryProductsData?.products[1],
     categoryProductsData?.products[2]
-  ]
+  ].filter(Boolean);
 
 
 
@@ -401,21 +401,33 @@ const CategoryPage = () => {
             >
               {BestsellersProducts.map((item) => (
                 <SwiperSlide key={item?.id}>
-                  <a href={`/product/${subCategory}/${category}/${item?.id}`} className="p-4 border rounded-lg bg-white shadow md:min-h-[341px] text-center !flex flex-col justify-center items-center">
+                  <a href={`/product/${subCategory}/${category}/${item?.id}`} className="p-4 border rounded-lg bg-white shadow md:min-h-[341px] text-center !flex flex-col justify-between items-center">
                     <img
                       src={item?.thumbnail}
                       alt={item?.title}
-                      className="w-full h-auto  object-cover border border-solid border-black rounded-xl"
+                      className="w-full h-auto  max-h-48 min-h-48 object-center rounded-md"
                     />
                     {/* <p className="text-lg mt-4 bg-black text-white w-fit rounded-lg px-2 py-1">
                       ${item.price}
                     </p> */}
-                    <h3 className="text-lg text-center  md:text-heading3 md:leading-heading3">
+                    <h3 className="text-lg text-center  md:text-heading3 md:leading-heading3 mt-2">
                       {item?.title}
                     </h3>
                     {/* <p className="text-sm text-gray-600 mb-4">
                       {item.}
                     </p> */}
+
+<motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="bg-black text-white rounded-md w-fit p-2 md:text-button2 md:leading-button2 px-4 mb-4"
+                    onClick={() => {
+                      navigate(`/product/${subCategory}/${category}/${item?.id}`);
+                    }}
+                  >
+                    View Details
+                  </motion.button>
+                    
                   </a>
                 </SwiperSlide>
               ))}
