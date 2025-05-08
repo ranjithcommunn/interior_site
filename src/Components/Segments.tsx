@@ -4,6 +4,7 @@ import SegmentsIcon from "../assets/Segments.png";
 import ResidentialImage from "../assets/Residential.png";
 import InstitutionalImage from "../assets/Institutional.png";
 import CommercialImage from "../assets/Commercial.png";
+import { useNavigate } from "react-router-dom";
 
 interface Segment {
   id: number;
@@ -18,6 +19,8 @@ const Segments: React.FC = () => {
     { id: 2, name: "Institutional", imageUrl: InstitutionalImage },
     { id: 3, name: "Commercial", imageUrl: CommercialImage },
   ];
+
+  const navigate = useNavigate();
 
   return (
     <motion.section
@@ -75,6 +78,9 @@ const Segments: React.FC = () => {
                 whileHover={{ scale: 1.1, backgroundColor: "#333333" }} // Enlarge and darken on hover
                 whileTap={{ scale: 0.95 }} // Slight shrink on click
                 transition={{ duration: 0.2 }}
+                onClick={() => {
+                  navigate(`/living/sofas/pcat_01JMM5XCCR5XDCDQ6Z0M1A9M0W`);
+                }}
               >
                 View More
               </motion.button>

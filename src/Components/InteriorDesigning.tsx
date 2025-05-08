@@ -52,7 +52,7 @@ const InteriorDesigningList: InteriorDesigningItem[] = [
     imageurl: InteriorDesigningImage2,
     title: "Living Room Interior",
     description:
-      "Kitchen Interior - Let us help you design your kitchen. Leave the worry of mixing and matching furniture behind. Set up your space confidently by purchasing the complete look for a seamless experience.",
+      "Living Room Interior – Create a space you’ll love to live in. Forget the hassle of mixing and matching furniture. Choose from our curated complete looks and set up your living room with confidence and style—for a truly seamless experience.",
   },
 ];
 

@@ -405,7 +405,7 @@ const CategoryPage = () => {
                     <img
                       src={item?.thumbnail}
                       alt={item?.title}
-                      className="w-full h-auto rounded object-cover"
+                      className="w-full h-auto  object-cover border border-solid border-black rounded-xl"
                     />
                     {/* <p className="text-lg mt-4 bg-black text-white w-fit rounded-lg px-2 py-1">
                       ${item.price}
