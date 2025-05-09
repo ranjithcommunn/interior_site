@@ -73,10 +73,9 @@ const ProductViewPage: React.FC = () => {
 
   const collection_id = data?.product?.collection_id;
 
-  const {
-    data: relatedProductsData,
-    error: relatedProductsError,
-  } = useQuery<{ products: Product[] }>(
+  const { data: relatedProductsData, error: relatedProductsError } = useQuery<{
+    products: Product[];
+  }>(
     ["relatedProducts", collection_id],
     () => fetchRelatedProducts(collection_id),
     { enabled: !!collection_id }
@@ -111,11 +110,7 @@ const ProductViewPage: React.FC = () => {
           <img
             src={data?.product?.thumbnail}
             alt={data?.product?.title}
-            style={{
-              maxWidth: "100%",
-              maxHeight: "100%",
-              objectFit: "contain",
-            }}
+            className="object-contain w-full h-full mix-blend-multiply"
           />
         </motion.div>
 
@@ -148,7 +143,6 @@ const ProductViewPage: React.FC = () => {
           >
             {data?.product?.description}
           </motion.p>
-
 
           <motion.div
             initial={{ opacity: 0 }}
@@ -186,27 +180,26 @@ const ProductViewPage: React.FC = () => {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.5 + index * 0.2 }}
-                className="bg-[#D3D3D3] flex flex-col items-center min-w-full max-w-fit box-border rounded-xl max-h-[352px] cursor-pointer mt-3 overflow-hidden"
+                className="bg-[#D3D3D3] flex flex-col items-center min-w-full max-w-fit box-border rounded-xl cursor-pointer mt-3 overflow-hidden"
                 onClick={() => {
                   navigate(`/product/${item.id}`);
                 }}
               >
+                {/* Product Image */}
                 <motion.div
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="min-w-full h-[300px] overflow-hidden flex items-center justify-center bg-[#f5f5f5] rounded-tl-[12px] rounded-tr-[12px]"
+                  className="w-full h-[300px] flex items-center justify-center bg-[#f5f5f5] rounded-t-xl overflow-hidden"
                 >
                   <img
                     src={item.thumbnail}
                     alt={item.title}
-                    style={{
-                      maxWidth: "100%",
-                      maxHeight: "100%",
-                      objectFit: "contain",
-                    }}
+                    className="object-contain w-full h-full mix-blend-multiply"
                   />
                 </motion.div>
+
+                {/* Title & Button */}
                 <div className="w-full text-center px-4 py-6 flex flex-col items-center justify-center">
                   <h4 className="font-bold text-md md:text-xl mb-3">
                     {item.title}
@@ -215,7 +208,8 @@ const ProductViewPage: React.FC = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="bg-black text-white rounded-md w-full p-2 md:text-button2 md:leading-button2"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent parent click navigation
                       navigate(`/product/${item.id}`);
                     }}
                   >

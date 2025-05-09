@@ -43,7 +43,7 @@ const InteriorDesigningList: InteriorDesigningItem[] = [
   {
     id: 1,
     imageurl: InteriorDesigningImage,
-    title: "Interior Designing",
+    title: "Interiors",
     description:
       "Kitchen Interior - Let us help you design your kitchen. Leave the worry of mixing and matching furniture behind. Set up your space confidently by purchasing the complete look for a seamless experience.",
   },

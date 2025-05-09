@@ -140,10 +140,8 @@ const CategoryPage = () => {
   const BestsellersProducts = [
     categoryProductsData?.products[0],
     categoryProductsData?.products[1],
-    categoryProductsData?.products[2]
+    categoryProductsData?.products[2],
   ].filter(Boolean);
-
-
 
   return (
     <main className="flex-grow box-border font-Poppins">
@@ -195,16 +193,18 @@ const CategoryPage = () => {
                       id={`mobile-subcategory-list-${item.id}`}
                     >
                       {item.category_children.map((subItem) => (
-                       <li
-                       key={subItem.id}
-                       className="py-1 text-sm text-gray-600 hover:text-black"
-                       onClick={() => {
-                         navigate(`/${item.handle}/${subItem.handle}/${subItem.id}`);
-                         setOpenMenu(false); 
-                       }}
-                     >
-                       {subItem.name}
-                     </li>
+                        <li
+                          key={subItem.id}
+                          className="py-1 text-sm text-gray-600 hover:text-black"
+                          onClick={() => {
+                            navigate(
+                              `/${item.handle}/${subItem.handle}/${subItem.id}`
+                            );
+                            setOpenMenu(false);
+                          }}
+                        >
+                          {subItem.name}
+                        </li>
                       ))}
                     </ul>
                   )}
@@ -284,7 +284,7 @@ const CategoryPage = () => {
 
           {categoryProductsData &&
           categoryProductsData?.products?.length > 0 ? (
-            <div className=" bg-white p-4 grid grid-cols-2 md:grid-cols-4 gap-6 flex-1 w-full">
+            <div className="bg-white p-4 grid grid-cols-2 md:grid-cols-4 gap-6 flex-1 w-full">
               {categoryProductsData?.products.map((product, index) => (
                 <motion.div
                   key={product.id}
@@ -302,22 +302,23 @@ const CategoryPage = () => {
                     )
                   }
                 >
-                  <img
-                    src={product.thumbnail}
-                    alt={product.title}
-                    className="border border-solid border-black rounded-xl w-[270px] h-[190px] object-fill"
-                  />
+                  <div className="w-[270px] h-[190px] border border-solid border-black rounded-xl flex items-center justify-center overflow-hidden">
+                    <img
+                      src={product.thumbnail}
+                      alt={product.title}
+                      className="object-contain w-full h-full"
+                    />
+                  </div>
                   <h5 className="text-lg md:text-xl">{product.title}</h5>
-                  {/* <button className="bg-black text-white rounded-md p-2 w-fit md:text-base px-4">
-                    <EnquireNowBtn />
-                  </button> */}
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="bg-black text-white rounded-md w-fit p-2 md:text-button2 md:leading-button2 px-4"
-                    onClick={() => {
-                      navigate(`/product/${subCategory}/${category}/${product.id}`);
-                    }}
+                    onClick={() =>
+                      navigate(
+                        `/product/${subCategory}/${category}/${product.id}`
+                      )
+                    }
                   >
                     View Details
                   </motion.button>
@@ -401,7 +402,10 @@ const CategoryPage = () => {
             >
               {BestsellersProducts.map((item) => (
                 <SwiperSlide key={item?.id}>
-                  <a href={`/product/${subCategory}/${category}/${item?.id}`} className="p-4 border rounded-lg bg-white shadow md:min-h-[341px] text-center !flex flex-col justify-between items-center">
+                  <a
+                    href={`/product/${subCategory}/${category}/${item?.id}`}
+                    className="p-4 border rounded-lg bg-white shadow md:min-h-[341px] text-center !flex flex-col justify-between items-center"
+                  >
                     <img
                       src={item?.thumbnail}
                       alt={item?.title}
@@ -417,17 +421,18 @@ const CategoryPage = () => {
                       {item.}
                     </p> */}
 
-<motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-black text-white rounded-md w-fit p-2 md:text-button2 md:leading-button2 px-4 mb-4"
-                    onClick={() => {
-                      navigate(`/product/${subCategory}/${category}/${item?.id}`);
-                    }}
-                  >
-                    View Details
-                  </motion.button>
-                    
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="bg-black text-white rounded-md w-fit p-2 md:text-button2 md:leading-button2 px-4 mb-4"
+                      onClick={() => {
+                        navigate(
+                          `/product/${subCategory}/${category}/${item?.id}`
+                        );
+                      }}
+                    >
+                      View Details
+                    </motion.button>
                   </a>
                 </SwiperSlide>
               ))}
