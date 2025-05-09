@@ -284,7 +284,7 @@ const CategoryPage = () => {
 
           {categoryProductsData &&
           categoryProductsData?.products?.length > 0 ? (
-            <div className="bg-white p-4 grid grid-cols-2 md:grid-cols-4 gap-6 flex-1 w-full">
+            <div className="bg-white p-4 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full">
               {categoryProductsData?.products.map((product, index) => (
                 <motion.div
                   key={product.id}
@@ -302,23 +302,29 @@ const CategoryPage = () => {
                     )
                   }
                 >
-                  <div className="w-[270px] h-[190px] border border-solid border-black rounded-xl flex items-center justify-center overflow-hidden">
+                  {/* Responsive Image Container */}
+                  <div className="w-full aspect-[4/3] border border-black rounded-xl flex items-center justify-center overflow-hidden">
                     <img
                       src={product.thumbnail}
                       alt={product.title}
                       className="object-contain w-full h-full"
                     />
                   </div>
+
+                  {/* Title */}
                   <h5 className="text-lg md:text-xl">{product.title}</h5>
+
+                  {/* View Details Button */}
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="bg-black text-white rounded-md w-fit p-2 md:text-button2 md:leading-button2 px-4"
-                    onClick={() =>
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent parent click
                       navigate(
                         `/product/${subCategory}/${category}/${product.id}`
-                      )
-                    }
+                      );
+                    }}
                   >
                     View Details
                   </motion.button>
@@ -404,28 +410,29 @@ const CategoryPage = () => {
                 <SwiperSlide key={item?.id}>
                   <a
                     href={`/product/${subCategory}/${category}/${item?.id}`}
-                    className="p-4 border rounded-lg bg-white shadow md:min-h-[341px] text-center !flex flex-col justify-between items-center"
+                    className="p-4 border rounded-lg bg-white shadow md:min-h-[341px] flex flex-col justify-between items-center text-center"
                   >
-                    <img
-                      src={item?.thumbnail}
-                      alt={item?.title}
-                      className="w-full h-auto  max-h-48 min-h-48 object-center rounded-md"
-                    />
-                    {/* <p className="text-lg mt-4 bg-black text-white w-fit rounded-lg px-2 py-1">
-                      ${item.price}
-                    </p> */}
-                    <h3 className="text-lg text-center  md:text-heading3 md:leading-heading3 mt-2">
+                    {/* Product Image */}
+                    <div className="w-full h-48 flex items-center justify-center bg-[#f5f5f5] rounded-md overflow-hidden">
+                      <img
+                        src={item?.thumbnail}
+                        alt={item?.title}
+                        className="object-contain w-full h-full mix-blend-multiply"
+                      />
+                    </div>
+
+                    {/* Product Title */}
+                    <h3 className="text-lg md:text-heading3 md:leading-heading3 mt-4">
                       {item?.title}
                     </h3>
-                    {/* <p className="text-sm text-gray-600 mb-4">
-                      {item.}
-                    </p> */}
 
+                    {/* View Details Button */}
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="bg-black text-white rounded-md w-fit p-2 md:text-button2 md:leading-button2 px-4 mb-4"
-                      onClick={() => {
+                      className="bg-black text-white rounded-md w-fit p-2 md:text-button2 md:leading-button2 px-4 mt-4"
+                      onClick={(e) => {
+                        e.preventDefault(); // Prevent <a> default navigation
                         navigate(
                           `/product/${subCategory}/${category}/${item?.id}`
                         );

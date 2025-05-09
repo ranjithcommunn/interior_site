@@ -137,11 +137,11 @@ const TrendingProducts: React.FC = () => {
       </motion.div>
 
       {/* Products Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 mt-8">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 mt-8 w-full">
         {products.map((product, index) => (
           <motion.div
             key={product.id}
-            className="relative bg-[#D3D3D3] rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
+            className="relative bg-[#e8e8e8] rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group cursor-pointer"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
@@ -149,26 +149,25 @@ const TrendingProducts: React.FC = () => {
               duration: 0.5,
               ease: "easeOut",
             }}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.03 }}
             onClick={() => navigate(`/product/${product.id}`)}
           >
             {/* Product Image */}
-            <motion.img
-  src={product.thumbnail || "https://via.placeholder.com/150"}
-  alt={product.title}
-  className="w-full h-auto md:max-h-44 aspect-video object-fit transition-opacity duration-300 group-hover:opacity-70"
-  whileHover={{ opacity: 0.8 }}
-  transition={{ duration: 0.3 }}
-/>
-
-            {/* View More Button */}
-            {/* <div className="absolute md:text-button2 md:leading-button2 font-Poppins top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black text-white text-[10px] md:text-base px-6 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-100 min-w-fit">
-              <EnquireNowBtn />
-            </div> */}
+            <motion.div
+              className="w-full aspect-[4/3] overflow-hidden"
+              
+              transition={{ duration: 0.3 }}
+            >
+              <img
+                src={product.thumbnail || "https://via.placeholder.com/150"}
+                alt={product.title}
+                className="w-full h-full object-contain mix-blend-multiply"
+              />
+            </motion.div>
 
             {/* Product Name */}
             <div className="p-4">
-              <h3 className="text-sm md:text-text1 md:leading-text1 text-gray-800 font-Poppins">
+              <h3 className="text-sm md:text-base font-medium text-gray-800 text-center">
                 {product.title}
               </h3>
             </div>

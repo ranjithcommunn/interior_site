@@ -105,7 +105,7 @@ const ProductViewPage: React.FC = () => {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-full min-w-0 md:min-w-[400px] h-[300px] overflow-hidden flex items-center justify-center bg-[#f5f5f5] rounded-[12px]"
+          className="w-full min-w-0 md:min-w-[300px] max-w-fit px-4 h-[300px] overflow-hidden flex items-center justify-center bg-[#f5f5f5] rounded-[12px]"
         >
           <img
             src={data?.product?.thumbnail}
