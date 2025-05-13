@@ -4,6 +4,7 @@ import TrendingProductsIcon from "../assets/TrendingProducts.png";
 //import EnquireNowBtn from "./EnquireNowBtn";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import EnquireNowBtn from "./EnquireNowBtn";
 
 export interface ProductOptionValue {
   id: string;
@@ -141,7 +142,7 @@ const TrendingProducts: React.FC = () => {
         {products.map((product, index) => (
           <motion.div
             key={product.id}
-            className="relative bg-[#e8e8e8] rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group cursor-pointer"
+            className="relative bg-[#D3D3D3] cursor-pointer rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
@@ -149,12 +150,12 @@ const TrendingProducts: React.FC = () => {
               duration: 0.5,
               ease: "easeOut",
             }}
-            whileHover={{ scale: 1.03 }}
+            whileHover={{ scale: 1.05 }}
             onClick={() => navigate(`/product/${product.id}`)}
           >
             {/* Product Image */}
             <motion.div
-              className="w-full aspect-[4/3] overflow-hidden"
+              className="w-full aspect-[4/3] overflow-hidden bg-white"
               
               transition={{ duration: 0.3 }}
             >
@@ -165,9 +166,16 @@ const TrendingProducts: React.FC = () => {
               />
             </motion.div>
 
+
+
+            {/* View More Button */}
+            <div className="hidden md:flex absolute cursor-pointer md:text-button2 md:leading-button2 font-Poppins top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black text-white text-[10px] md:text-base px-3 md:px-6 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-100 min-w-fit">
+              <EnquireNowBtn />
+            </div>
+
             {/* Product Name */}
             <div className="p-4">
-              <h3 className="text-sm md:text-base font-medium text-gray-800 text-center">
+              <h3 className="text-sm md:text-text1 md:leading-text1 text-gray-800 font-Poppins">
                 {product.title}
               </h3>
             </div>
