@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import TrendingProductsIcon from "../assets/TrendingProducts.png";
-//import EnquireNowBtn from "./EnquireNowBtn";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import EnquireNowBtn from "./EnquireNowBtn";
+
 
 export interface ProductOptionValue {
   id: string;
@@ -170,7 +169,7 @@ const TrendingProducts: React.FC = () => {
 
             {/* View More Button */}
             <div className="hidden md:flex absolute cursor-pointer md:text-button2 md:leading-button2 font-Poppins top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black text-white text-[10px] md:text-base px-3 md:px-6 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-100 min-w-fit">
-              <EnquireNowBtn />
+               <p className="min-w-fit text-[9px] md:text-[12px]">View Details</p>
             </div>
 
             {/* Product Name */}
