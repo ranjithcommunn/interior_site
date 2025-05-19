@@ -18,25 +18,25 @@ const standOutList: StandOutItem[] = [
   {
     id: 1,
     title: "500 + Collections",
-    info: "Our journey begins with a comprehensive understanding of your unique style and space requirements.",
+    info: "Discover an extensive range of thoughtfully curated furniture collections designed to match diverse styles and preferences. Whether you're furnishing a cozy home or a large space, there's something tailored just for you.",
     image: StandOurImage1,
   },
   {
     id: 2,
     title: "300 + Fabrics",
-    info: "Our journey begins with a comprehensive understanding of your unique style and space requirements.",
+    info: "Choose from a wide array of premium fabrics that combine aesthetics with durability. Our selection ensures that your furniture not only looks great but also feels just right for your space.",
     image: StandOurImage2,
   },
   {
     id: 3,
     title: "Top-notch Quality",
-    info: "Our journey begins with a comprehensive understanding of your unique style and space requirements.",
+    info: "We prioritize craftsmanship and quality materials to deliver products that stand the test of time. Every piece is crafted with precision and a commitment to excellence.",
     image: StandOurImage3,
   },
   {
     id: 4,
     title: "Colour and Length customization",
-    info: "Our journey begins with a comprehensive understanding of your unique style and space requirements.",
+    info: "Personalize your furniture to perfectly suit your space with flexible options in color and dimensions. Tailor each piece to reflect your unique taste and requirements.",
     image: StandOurImage4,
   },
 ];
@@ -63,7 +63,7 @@ const StandsOut: React.FC = () => {
         {standOutList.map((item) => (
           <motion.div
             key={item.id}
-            className="flex flex-col items-center p-5 py-10 justify-between max-w-96 h-72 rounded-md bg-[#D3D3D3]"
+            className="flex flex-col items-center p-5 py-10 justify-between max-w-96 min-h-72 max-h-96 rounded-md bg-[#D3D3D3]"
             variants={itemVariant}
             initial="hidden"
             whileInView="visible"
@@ -78,7 +78,7 @@ const StandsOut: React.FC = () => {
               whileInView="visible"
               viewport={{ once: false, amount: 0.2 }}
             />
-            <div className="text-left">
+            <div className="text-left mt-4">
               <motion.h3
                 className="font-bold font-Poppins md:text-heading3 md:leading-heading3"
                 variants={itemVariant}
