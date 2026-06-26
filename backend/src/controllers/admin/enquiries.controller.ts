@@ -5,11 +5,15 @@ import { asyncHandler } from "../../utils/asyncHandler";
 import { ApiError } from "../../utils/ApiError";
 
 export const listEnquiries = asyncHandler(async (req: Request, res: Response) => {
-  const { source, status, page = "1", limit = "20" } = req.query;
+  const { search, source, status, page = "1", limit = "20" } = req.query;
 
   const filter: Record<string, unknown> = {};
   if (source) filter.source = source;
   if (status) filter.status = status;
+  if (search) {
+    const regex = { $regex: String(search), $options: "i" };
+    filter.$or = [{ name: regex }, { phone: regex }, { email: regex }, { message: regex }];
+  }
 
   const pageNum = Math.max(Number(page) || 1, 1);
   const limitNum = Math.min(Number(limit) || 20, 100);

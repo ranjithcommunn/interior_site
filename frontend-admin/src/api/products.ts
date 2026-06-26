@@ -6,12 +6,16 @@ export interface ProductImage {
   rank: number;
 }
 
+export interface ProductCategory extends Omit<Category, "parentCategory"> {
+  parentCategory: { _id: string; name: string; handle: string } | string | null;
+}
+
 export interface Product {
   _id: string;
   title: string;
   handle: string;
   description: string;
-  category: Category | string;
+  category: ProductCategory | string;
   images: ProductImage[];
   thumbnail: string;
   isActive: boolean;

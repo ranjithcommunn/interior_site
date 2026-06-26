@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import EnquireNowBtn from "@/Components/EnquireNowBtn";
 import { useQuery } from "@tanstack/react-query";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import MoonLoader from "react-spinners/MoonLoader";
+import { Link, useParams } from "react-router-dom";
 import ProductCard from "@/Components/ProductCard";
+import { Skeleton, ProductGridSkeleton } from "@/Components/Skeleton";
 
 interface ProductImage {
   url: string;
@@ -71,7 +71,6 @@ const fetchRelatedProducts = async (
 };
 
 const ProductViewPage: React.FC = () => {
-  const navigate = useNavigate();
   const { product_id } = useParams<{ product_id?: string }>();
   const [activeImage, setActiveImage] = useState(0);
 
@@ -98,9 +97,30 @@ const ProductViewPage: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="w-full flex justify-center items-center h-[80vh]">
-        <MoonLoader />
-      </div>
+      <main className="box-border px-5 md:px-20 py-6 font-Poppins">
+        <Skeleton className="h-4 w-64 mb-6" />
+        <section className="flex flex-col md:flex-row gap-8 lg:gap-12">
+          <div className="w-full md:w-[45%] lg:w-[40%] shrink-0">
+            <Skeleton className="w-full aspect-square rounded-2xl" />
+            <div className="flex gap-3 mt-4">
+              {Array.from({ length: 3 }).map((_, i) => (
+                <Skeleton key={i} className="w-16 h-16 rounded-lg shrink-0" />
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-col items-start gap-4 flex-1 w-full">
+            <Skeleton className="h-4 w-32" />
+            <Skeleton className="h-8 w-2/3" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-5/6" />
+            <Skeleton className="h-12 w-full md:w-72 mt-3" />
+          </div>
+        </section>
+        <div className="my-12">
+          <Skeleton className="h-7 w-56 mb-6" />
+          <ProductGridSkeleton count={4} />
+        </div>
+      </main>
     );
   }
 
@@ -231,7 +251,7 @@ const ProductViewPage: React.FC = () => {
             className="mt-3 w-full"
           >
             <p className="text-text1 font-medium">Customisation Available</p>
-            <div className="bg-black md:w-72 w-full rounded-lg p-2 text-white text-sm mt-2 text-center hover:opacity-90 transition-opacity">
+            <div className="bg-black md:w-72 w-full rounded-lg py-3 px-4 text-white mt-2 hover:bg-gray-900 transition-colors">
               <EnquireNowBtn productId={product?.id} />
             </div>
           </motion.div>

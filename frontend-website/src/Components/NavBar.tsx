@@ -162,7 +162,11 @@ const NavBar = () => {
             </li>
           </ul>
         ) : (
-          <p className="text-white text-sm">Loading...</p>
+          <ul className="flex items-center gap-5 lg:gap-7">
+            {Array.from({ length: 7 }).map((_, i) => (
+              <li key={i} className="h-4 w-14 rounded-md bg-white/15 animate-pulse" />
+            ))}
+          </ul>
         )}
       </div>
 

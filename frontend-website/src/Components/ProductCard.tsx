@@ -16,14 +16,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ id, title, thumbnail, badge, 
 
   return (
     <motion.div
-      className="group flex flex-col cursor-pointer"
+      className="group bg-white rounded-2xl border border-gray-100 overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-gray-200"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ delay, duration: 0.4, ease: "easeOut" }}
       onClick={() => navigate(`/product/${id}`)}
     >
-      <div className="relative aspect-square bg-[#f5f5f5] rounded-2xl overflow-hidden border border-gray-100 group-hover:border-gray-200 group-hover:shadow-lg transition-all duration-300">
+      <div className="relative aspect-square bg-[#f5f5f5]">
         {badge && (
           <span className="absolute top-3 left-3 z-10 bg-black text-white text-[10px] font-semibold uppercase tracking-wide px-2.5 py-1 rounded-full">
             {badge}
@@ -41,9 +41,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ id, title, thumbnail, badge, 
         </div>
       </div>
 
-      <h3 className="text-sm md:text-base font-medium text-gray-800 mt-3 line-clamp-1 group-hover:text-black">
-        {title}
-      </h3>
+      <div className="p-3.5 border-t border-gray-100">
+        <h3 className="text-sm md:text-base font-medium text-gray-800 line-clamp-1 group-hover:text-black">
+          {title}
+        </h3>
+      </div>
     </motion.div>
   );
 };

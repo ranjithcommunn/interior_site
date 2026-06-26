@@ -28,6 +28,7 @@ interface RemoteCategory {
   id: string;
   name: string;
   handle: string | null;
+  image: string | null;
 }
 
 const categoriesList: Category[] = [
@@ -114,8 +115,11 @@ const ProductCategories: React.FC = () => {
     fetchCategories
   );
 
+  const resolveCategory = (matchHandle: string) =>
+    data?.product_categories.find((cat) => cat.handle === matchHandle);
+
   const resolveLink = (matchHandle: string): string | undefined => {
-    const remote = data?.product_categories.find((cat) => cat.handle === matchHandle);
+    const remote = resolveCategory(matchHandle);
     return remote ? `/${remote.handle}/${remote.id}` : undefined;
   };
 
@@ -131,40 +135,44 @@ const ProductCategories: React.FC = () => {
       </h1>
       <div className="relative w-full">
         <Slider {...settings}>
-          {categoriesList.map((category) => (
-            <motion.a
-              key={category.id}
-              href={resolveLink(category.matchHandle) || "#"}
-              className="relative rounded-md p-4 md:p-6 mx-2 h-48 md:h-52 overflow-hidden flex items-center justify-center"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{
-                duration: 0.5,
-                ease: "easeOut",
-              }}
-            >
-              {/* Background Image */}
-              <motion.div
-                className="absolute inset-0 bg-center bg-cover"
-                style={{
-                  backgroundImage: `url(${category.image_Url})`,
+          {categoriesList.map((category) => {
+            const remote = resolveCategory(category.matchHandle);
+            const displayImage = remote?.image || category.image_Url;
+            const displayName = remote?.name || category.name;
+
+            return (
+              <motion.a
+                key={category.id}
+                href={resolveLink(category.matchHandle) || "#"}
+                className="group relative block rounded-xl mx-2 h-48 md:h-52 overflow-hidden shadow-sm"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{
+                  duration: 0.5,
+                  ease: "easeOut",
                 }}
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.2 }}
-              />
+              >
+                {/* Background Image */}
+                <motion.div
+                  className="absolute inset-0 bg-center bg-cover transition-transform duration-500 group-hover:scale-110"
+                  style={{
+                    backgroundImage: `url(${displayImage})`,
+                  }}
+                />
 
-              {/* Overlay for readability (optional) */}
-              <div className="absolute inset-0 bg-white/20" />
+                {/* Overlay for text readability */}
+                <div className="absolute inset-0 bg-black/45 group-hover:bg-black/55 transition-colors" />
 
-              {/* Text on top */}
-              <div className="relative z-10 text-black text-center">
-                <p className="text-base md:text-heading3 md:leading-heading3 font-bold font-Poppins">
-                  {category.name}
-                </p>
-              </div>
-            </motion.a>
-          ))}
+                {/* Text on top, centered both axes independent of any parent layout */}
+                <div className="absolute inset-0 z-10 flex items-center justify-center text-center px-4">
+                  <p className="text-base md:text-heading3 md:leading-heading3 font-bold font-Poppins text-white">
+                    {displayName}
+                  </p>
+                </div>
+              </motion.a>
+            );
+          })}
         </Slider>
       </div>
     </motion.section>

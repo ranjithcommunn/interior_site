@@ -2,10 +2,7 @@ import React from "react";
 import logo from "../assets/logo.png";
 import InstagramIcon from "../assets/InstagramIcon.png";
 import LinkedinIcon from "../assets/LinkedInIcon.png";
-import FooterImage from "../assets/footer_image01.png";
-import phoneIcon from "../assets/phone_icon.svg";
-import mailIcon from "../assets/mail_icon.svg";
-import locationIcon from "../assets/location_icon.svg";
+import { Phone, Mail, MapPin } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 
@@ -106,17 +103,17 @@ const Footer: React.FC = () => {
           <h3 className="font-semibold text-base mb-5">Get In Touch</h3>
           <ul className="space-y-4">
             <li className="flex items-start gap-3">
-              <img src={phoneIcon} alt="" className="w-4 h-4 mt-0.5 shrink-0" />
+              <Phone size={16} className="mt-0.5 shrink-0 text-gray-400" />
               <span className="text-sm text-gray-400 font-DMSans">+91 95357 11662</span>
             </li>
             <li className="flex items-start gap-3">
-              <img src={mailIcon} alt="" className="w-4 h-4 mt-0.5 shrink-0" />
+              <Mail size={16} className="mt-0.5 shrink-0 text-gray-400" />
               <span className="text-sm text-gray-400 font-DMSans">
                 info@vibrer.co.in
               </span>
             </li>
             <li className="flex items-start gap-3">
-              <img src={locationIcon} alt="" className="w-4 h-4 mt-0.5 shrink-0" />
+              <MapPin size={16} className="mt-0.5 shrink-0 text-gray-400" />
               <span className="text-sm text-gray-400 font-DMSans leading-6">
                 M/s SREGA Electronics &amp; Furniture LLP,
                 <br />
@@ -133,9 +130,10 @@ const Footer: React.FC = () => {
 
       <hr className="border-white/10 my-10" />
 
-      <div className="flex items-center flex-col gap-4">
-        <p className="text-xs text-gray-500">2024 &copy; All rights reserved - Vibrer</p>
-        <img src={FooterImage} alt="Accepted payment methods" className="max-w-full" />
+      <div className="flex items-center justify-center">
+        <p className="text-xs text-gray-500">
+          {new Date().getFullYear()} &copy; All rights reserved - Vibrer
+        </p>
       </div>
     </footer>
   );

@@ -17,6 +17,7 @@ import adminEnquiriesRoutes from "./routes/admin/enquiries.routes";
 import adminUploadRoutes from "./routes/admin/upload.routes";
 import adminBannersRoutes from "./routes/admin/banners.routes";
 import adminInteriorSlidesRoutes from "./routes/admin/interiorSlides.routes";
+import adminDashboardRoutes from "./routes/admin/dashboard.routes";
 import { requireAdminAuth } from "./middleware/auth.middleware";
 
 export function createApp(): Express {
@@ -46,6 +47,7 @@ export function createApp(): Express {
   app.use("/admin/upload", requireAdminAuth, adminUploadRoutes);
   app.use("/admin/banners", requireAdminAuth, adminBannersRoutes);
   app.use("/admin/interior-slides", requireAdminAuth, adminInteriorSlidesRoutes);
+  app.use("/admin/dashboard", requireAdminAuth, adminDashboardRoutes);
 
   app.use(notFoundHandler);
   app.use(errorHandler);

@@ -10,6 +10,7 @@ export interface SerializedCategory {
   name: string;
   handle: string | null;
   parent_category_id: string | null;
+  image: string | null;
   category_children: SerializedCategory[];
 }
 
@@ -25,6 +26,7 @@ export function serializeCategoryTree(
       name: cat.name,
       handle: cat.handle,
       parent_category_id: cat.parentCategory ? String(cat.parentCategory) : null,
+      image: cat.image || null,
       category_children: serializeCategoryTree(categories, String(cat._id)),
     }));
 }

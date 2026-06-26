@@ -24,66 +24,68 @@ const Segments: React.FC = () => {
 
   return (
     <motion.section
-      className="px-5 md:px-20 my-10"
-      initial={{ opacity: 0, y: 50 }} 
-      animate={{ opacity: 1, y: 0 }} 
-      transition={{ duration: 0.8, ease: "easeOut" }} 
+      className="bg-[#FAFAFA] px-5 md:px-20 py-14 md:py-16"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
       {/* Header */}
-      <motion.div
-        className="bg-[#D3D3D3] p-3 rounded-md flex gap-3 items-center"
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 0.1, duration: 0.5 }}
-      >
-        <img src={SegmentsIcon} alt="Segments Icon" className="w-5   h-5   ml-5" />
-        <h2 className="text-lg md:text-heading2 md:leading-heading2 font-bold font-Poppins">Segments</h2>
-      </motion.div>
+      <div className="flex flex-col items-center text-center gap-3 mb-10">
+        <motion.div
+          className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm"
+          initial={{ scale: 0.8, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.4 }}
+        >
+          <img src={SegmentsIcon} alt="Segments Icon" className="w-5 h-5" />
+        </motion.div>
+        <span className="text-xs md:text-sm font-semibold tracking-widest text-gray-400 uppercase">
+          Where We Fit
+        </span>
+        <h2 className="text-2xl md:text-heading1 md:leading-heading1 font-bold font-Poppins">
+          Segments
+        </h2>
+      </div>
 
       {/* Segments List */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {SegmentsList.map((segment, index) => (
           <motion.div
             key={segment.id}
-            className="relative flex flex-col items-center justify-center rounded-xl shadow-md overflow-hidden h-[368px]"
-            initial={{ opacity: 0, scale: 0.9 }} // Start small and invisible
-            animate={{ opacity: 1, scale: 1 }} // Animate to full size and visible
+            className="group relative flex flex-col items-center justify-center rounded-2xl shadow-sm hover:shadow-lg transition-shadow overflow-hidden h-[368px]"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{
-              delay: 0.3 + index * 0.2, // Staggered animation for each card
+              delay: 0.1 * index,
               duration: 0.5,
               ease: "easeOut",
             }}
-            whileHover={{ scale: 1.05 }} // Slightly enlarge on hover
           >
             {/* Background Image */}
-            <motion.div
-              className="absolute inset-0"
-              style={{
-                backgroundImage: `url(${segment.imageUrl})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                opacity: 0.5,
-              }}
-              whileHover={{ opacity: 0.7 }} // Increase visibility on hover
-              transition={{ duration: 0.3 }}
-            ></motion.div>
+            <div
+              className="absolute inset-0 bg-center bg-cover transition-transform duration-500 group-hover:scale-110"
+              style={{ backgroundImage: `url(${segment.imageUrl})` }}
+            />
+
+            {/* Gradient overlay for legibility */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
             {/* Overlay Content */}
-            <div className="relative z-10 flex flex-col justify-between h-full py-10 text-center px-4">
-              <h3 className="text-xl md:text-heading2 md:leading-heading2 font-bold text-black mb-4 font-Poppins">
+            <div className="relative z-10 flex flex-col items-center justify-end h-full w-full pb-8 text-center px-4">
+              <h3 className="text-xl md:text-heading2 md:leading-heading2 font-bold text-white mb-4 font-Poppins">
                 {segment.name}
               </h3>
-              <motion.button
-                className="bg-[#1B1B1B] text-white text-sm md:text-button1 md:leading-button1 px-14 py-2 rounded-lg font-Poppins"
-                whileHover={{ scale: 1.1, backgroundColor: "#333333" }} // Enlarge and darken on hover
-                whileTap={{ scale: 0.95 }} // Slight shrink on click
-                transition={{ duration: 0.2 }}
+              <button
+                className="bg-white text-black text-sm md:text-button2 md:leading-button2 px-8 py-2.5 rounded-lg font-Poppins font-medium hover:bg-gray-100 transition-colors"
                 onClick={() => {
                   navigate("/contact-us");
                 }}
               >
                 View More
-              </motion.button>
+              </button>
             </div>
           </motion.div>
         ))}

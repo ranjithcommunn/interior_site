@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { ChevronUp, ChevronDown, Trash2 } from "lucide-react";
 import {
   InteriorSlide,
   createInteriorSlide,
@@ -9,6 +10,9 @@ import {
   updateInteriorSlide,
 } from "../../api/interiorSlides";
 import { uploadImage } from "../../api/upload";
+import { Checkbox } from "../../components/Checkbox";
+import { FileInput } from "../../components/FileInput";
+import { ConfirmDialog } from "../../components/ConfirmDialog";
 
 export const InteriorSlidesPage: React.FC = () => {
   const queryClient = useQueryClient();
@@ -22,6 +26,7 @@ export const InteriorSlidesPage: React.FC = () => {
   const [link, setLink] = useState("");
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
+  const [deleteTarget, setDeleteTarget] = useState<InteriorSlide | null>(null);
 
   const invalidate = () => queryClient.invalidateQueries({ queryKey: ["interiorSlides"] });
 
@@ -44,7 +49,10 @@ export const InteriorSlidesPage: React.FC = () => {
 
   const deleteMutation = useMutation({
     mutationFn: deleteInteriorSlide,
-    onSuccess: invalidate,
+    onSuccess: () => {
+      invalidate();
+      setDeleteTarget(null);
+    },
   });
 
   const reorderMutation = useMutation({
@@ -54,7 +62,8 @@ export const InteriorSlidesPage: React.FC = () => {
 
   const sorted = [...slides].sort((a, b) => a.rank - b.rank);
 
-  const handleFileSelect = async (file: File | null) => {
+  const handleFileSelect = async (files: FileList) => {
+    const file = files[0];
     if (!file) return;
     if (!title.trim()) {
       setError("Please enter a title before uploading the image.");
@@ -89,63 +98,62 @@ export const InteriorSlidesPage: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-6">Interior Design Slides</h1>
-      <p className="text-sm text-gray-500 mb-6">
-        Manages the "Interiors" carousel on the homepage (title, description, image, and an
-        optional "Know More" link).
-      </p>
-
-      <div className="bg-white rounded-lg p-5 mb-6 max-w-xl">
-        <h2 className="font-semibold mb-3">Add Slide</h2>
-        <input
-          type="text"
-          placeholder="Title (e.g. Kitchen Interior)"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="w-full border rounded-md p-2 mb-3"
-        />
-        <textarea
-          placeholder="Description"
-          rows={3}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className="w-full border rounded-md p-2 mb-3"
-        />
-        <input
-          type="text"
-          placeholder="Know More link (optional, e.g. /kitchen-interior)"
-          value={link}
-          onChange={(e) => setLink(e.target.value)}
-          className="w-full border rounded-md p-2 mb-3"
-        />
-        <input
-          type="file"
-          accept="image/*"
-          disabled={uploading}
-          onChange={(e) => handleFileSelect(e.target.files?.[0] || null)}
-        />
-        {uploading && <p className="text-sm text-gray-500 mt-2">Uploading...</p>}
-        {error && <p className="text-sm text-red-500 mt-2">{error}</p>}
+    <div className="space-y-6">
+      <div className="bg-white rounded-2xl border border-gray-100 p-6">
+        <h2 className="font-semibold text-gray-800 mb-1">Add Slide</h2>
+        <p className="text-sm text-gray-500 mb-5">
+          Manages the "Interiors" carousel on the homepage.
+        </p>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="space-y-3">
+            <input
+              type="text"
+              placeholder="Title (e.g. Kitchen Interior)"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="w-full border border-gray-200 rounded-lg p-2.5 text-sm outline-none focus:border-black transition-colors"
+            />
+            <textarea
+              placeholder="Description"
+              rows={4}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="w-full border border-gray-200 rounded-lg p-2.5 text-sm outline-none focus:border-black transition-colors"
+            />
+            <input
+              type="text"
+              placeholder="Know More link (optional, e.g. /kitchen-interior)"
+              value={link}
+              onChange={(e) => setLink(e.target.value)}
+              className="w-full border border-gray-200 rounded-lg p-2.5 text-sm outline-none focus:border-black transition-colors"
+            />
+          </div>
+          <div>
+            <FileInput onFiles={handleFileSelect} disabled={uploading} uploading={uploading} />
+            {error && <p className="text-sm text-red-500 mt-2">{error}</p>}
+          </div>
+        </div>
       </div>
 
       {isLoading ? (
-        <p>Loading...</p>
+        <p className="text-sm text-gray-400">Loading...</p>
       ) : sorted.length === 0 ? (
-        <p className="text-gray-500">No slides yet. Add one above.</p>
+        <div className="bg-white rounded-2xl border border-gray-100 p-10 text-center">
+          <p className="text-gray-400">No slides yet. Add one above.</p>
+        </div>
       ) : (
         <div className="space-y-3">
           {sorted.map((slide, index) => (
             <div
               key={slide._id}
-              className={`bg-white rounded-lg p-4 flex items-start gap-4 ${
+              className={`bg-white rounded-2xl border border-gray-100 p-4 flex items-start gap-4 ${
                 !slide.isActive ? "opacity-50" : ""
               }`}
             >
               <img
                 src={slide.image}
                 alt=""
-                className="w-32 h-20 object-cover rounded-md shrink-0"
+                className="w-32 h-20 object-cover rounded-lg shrink-0"
               />
               <div className="flex-1 min-w-0 space-y-2">
                 <input
@@ -154,7 +162,7 @@ export const InteriorSlidesPage: React.FC = () => {
                   onBlur={(e) =>
                     updateMutation.mutate({ id: slide._id, input: { title: e.target.value } })
                   }
-                  className="w-full border rounded-md p-2 text-sm font-medium"
+                  className="w-full border border-gray-200 rounded-lg p-2 text-sm font-medium outline-none focus:border-black transition-colors"
                 />
                 <textarea
                   defaultValue={slide.description}
@@ -165,7 +173,7 @@ export const InteriorSlidesPage: React.FC = () => {
                       input: { description: e.target.value },
                     })
                   }
-                  className="w-full border rounded-md p-2 text-sm"
+                  className="w-full border border-gray-200 rounded-lg p-2 text-sm outline-none focus:border-black transition-colors"
                 />
                 <input
                   type="text"
@@ -174,41 +182,51 @@ export const InteriorSlidesPage: React.FC = () => {
                   onBlur={(e) =>
                     updateMutation.mutate({ id: slide._id, input: { link: e.target.value } })
                   }
-                  className="w-full border rounded-md p-2 text-sm"
+                  className="w-full border border-gray-200 rounded-lg p-2 text-sm outline-none focus:border-black transition-colors"
                 />
               </div>
               <div className="flex flex-col items-end gap-2 text-sm shrink-0">
-                <div className="flex items-center gap-2">
-                  <button onClick={() => moveRank(index, -1)} className="text-gray-500 hover:text-black">
-                    ↑
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={() => moveRank(index, -1)}
+                    className="p-1.5 text-gray-400 hover:text-black hover:bg-gray-50 rounded-md transition-colors"
+                  >
+                    <ChevronUp size={15} />
                   </button>
-                  <button onClick={() => moveRank(index, 1)} className="text-gray-500 hover:text-black">
-                    ↓
+                  <button
+                    onClick={() => moveRank(index, 1)}
+                    className="p-1.5 text-gray-400 hover:text-black hover:bg-gray-50 rounded-md transition-colors"
+                  >
+                    <ChevronDown size={15} />
                   </button>
                 </div>
-                <label className="flex items-center gap-1.5">
-                  <input
-                    type="checkbox"
-                    checked={slide.isActive}
-                    onChange={(e) =>
-                      updateMutation.mutate({ id: slide._id, input: { isActive: e.target.checked } })
-                    }
-                  />
-                  Active
-                </label>
+                <Checkbox
+                  checked={slide.isActive}
+                  onChange={(checked) =>
+                    updateMutation.mutate({ id: slide._id, input: { isActive: checked } })
+                  }
+                  label="Active"
+                />
                 <button
-                  onClick={() => {
-                    if (confirm("Delete this slide?")) deleteMutation.mutate(slide._id);
-                  }}
-                  className="text-red-600 hover:underline"
+                  onClick={() => setDeleteTarget(slide)}
+                  className="p-1.5 text-red-500 hover:bg-red-50 rounded-md transition-colors"
                 >
-                  Delete
+                  <Trash2 size={15} />
                 </button>
               </div>
             </div>
           ))}
         </div>
       )}
+
+      <ConfirmDialog
+        open={!!deleteTarget}
+        title="Delete this slide?"
+        description="This interior design slide will be permanently removed."
+        confirmLabel="Delete"
+        onConfirm={() => deleteTarget && deleteMutation.mutate(deleteTarget._id)}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </div>
   );
 };

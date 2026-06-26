@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { z } from "zod";
 import slugify from "slugify";
 import { Product } from "../../models/Product";
+import { Category } from "../../models/Category";
 import { asyncHandler } from "../../utils/asyncHandler";
 import { ApiError } from "../../utils/ApiError";
 
@@ -32,7 +33,10 @@ export const listProductsAdmin = asyncHandler(async (req: Request, res: Response
     filter.title = { $regex: String(search), $options: "i" };
   }
   if (category) {
-    filter.category = category;
+    // If a top-level category is selected, include its sub-categories' products too.
+    const children = await Category.find({ parentCategory: category }).select("_id");
+    const categoryIds = [category, ...children.map((c) => c._id)];
+    filter.category = categoryIds.length > 1 ? { $in: categoryIds } : category;
   }
 
   const pageNum = Math.max(Number(page) || 1, 1);
@@ -40,7 +44,11 @@ export const listProductsAdmin = asyncHandler(async (req: Request, res: Response
 
   const [products, total] = await Promise.all([
     Product.find(filter)
-      .populate("category", "name handle")
+      .populate({
+        path: "category",
+        select: "name handle parentCategory",
+        populate: { path: "parentCategory", select: "name handle" },
+      })
       .sort({ updatedAt: -1 })
       .skip((pageNum - 1) * limitNum)
       .limit(limitNum),

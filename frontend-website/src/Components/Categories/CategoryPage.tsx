@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import MoonLoader from "react-spinners/MoonLoader";
+import { Skeleton, ProductGridSkeleton } from "../Skeleton";
 import {
   ChevronDown,
   ChevronLeft,
@@ -11,7 +11,6 @@ import {
 import "swiper/swiper-bundle.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import ProductCard from "../ProductCard";
@@ -104,9 +103,20 @@ const CategoryPage = () => {
 
   if (categoryProductsLoading || menuLoading) {
     return (
-      <div className="w-full flex justify-center items-center h-[80vh]">
-        <MoonLoader />
-      </div>
+      <main className="flex-grow box-border font-Poppins">
+        <section className="flex items-start gap-8 py-8 w-full px-5 md:px-8">
+          <div className="w-64 shrink-0 hidden md:block space-y-3">
+            <Skeleton className="h-5 w-24 mb-4" />
+            {Array.from({ length: 7 }).map((_, i) => (
+              <Skeleton key={i} className="h-9 w-full" />
+            ))}
+          </div>
+          <div className="w-full flex flex-col min-w-0">
+            <Skeleton className="h-4 w-32 mb-5" />
+            <ProductGridSkeleton count={8} />
+          </div>
+        </section>
+      </main>
     );
   }
 

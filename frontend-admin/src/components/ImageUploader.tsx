@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { uploadImage } from "../api/upload";
 import { ProductImage } from "../api/products";
+import { FileInput } from "./FileInput";
 
 interface ImageUploaderProps {
   images: ProductImage[];
@@ -45,40 +46,56 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ images, onChange }
 
   return (
     <div>
-      <div className="grid grid-cols-4 gap-2 mb-3">
-        {images
-          .slice()
-          .sort((a, b) => a.rank - b.rank)
-          .map((img, index) => (
-            <div key={img.url + index} className="relative border rounded-md overflow-hidden group">
-              <img src={img.url} alt="" className="w-full h-20 object-cover" />
-              {index === 0 && (
-                <span className="absolute top-0 left-0 bg-black text-white text-[10px] px-1">
-                  Thumbnail
-                </span>
-              )}
-              <div className="absolute bottom-0 right-0 flex bg-white/80 text-xs">
-                <button type="button" onClick={() => moveImage(index, -1)} className="px-1">
-                  ↑
-                </button>
-                <button type="button" onClick={() => moveImage(index, 1)} className="px-1">
-                  ↓
-                </button>
-                <button type="button" onClick={() => removeImage(index)} className="px-1 text-red-600">
-                  ✕
-                </button>
+      {images.length > 0 && (
+        <div className="grid grid-cols-4 gap-2.5 mb-3">
+          {images
+            .slice()
+            .sort((a, b) => a.rank - b.rank)
+            .map((img, index) => (
+              <div
+                key={img.url + index}
+                className="relative rounded-lg overflow-hidden border border-gray-200 group"
+              >
+                <img src={img.url} alt="" className="w-full h-20 object-cover" />
+                {index === 0 && (
+                  <span className="absolute top-1 left-1 bg-black text-white text-[10px] px-1.5 py-0.5 rounded-md">
+                    Thumbnail
+                  </span>
+                )}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center gap-1 opacity-0 group-hover:opacity-100">
+                  <button
+                    type="button"
+                    onClick={() => moveImage(index, -1)}
+                    className="w-6 h-6 rounded-full bg-white/90 text-xs flex items-center justify-center"
+                  >
+                    ↑
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => moveImage(index, 1)}
+                    className="w-6 h-6 rounded-full bg-white/90 text-xs flex items-center justify-center"
+                  >
+                    ↓
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => removeImage(index)}
+                    className="w-6 h-6 rounded-full bg-white/90 text-red-600 text-xs flex items-center justify-center"
+                  >
+                    ✕
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
-      </div>
-      <input
-        type="file"
-        accept="image/*"
-        multiple
-        onChange={(e) => handleFiles(e.target.files)}
+            ))}
+        </div>
+      )}
+      <FileInput
+        onFiles={handleFiles}
         disabled={uploading}
+        uploading={uploading}
+        multiple
+        label="Click to upload, or drag images here"
       />
-      {uploading && <p className="text-sm text-gray-500 mt-1">Uploading...</p>}
       {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
     </div>
   );

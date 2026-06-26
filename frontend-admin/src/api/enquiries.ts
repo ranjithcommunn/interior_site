@@ -13,6 +13,7 @@ export interface Enquiry {
 }
 
 export interface EnquiryListParams {
+  search?: string;
   source?: string;
   status?: string;
   page?: number;
