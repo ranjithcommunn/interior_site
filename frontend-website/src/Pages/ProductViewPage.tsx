@@ -132,8 +132,8 @@ const ProductViewPage: React.FC = () => {
     product?.images && product.images.length > 0
       ? [...product.images].sort((a, b) => a.rank - b.rank).map((img) => img.url)
       : product?.thumbnail
-      ? [product.thumbnail]
-      : [];
+        ? [product.thumbnail]
+        : [];
 
   const parentCategory = product?.category?.parent;
   const currentCategory = product?.category;
@@ -202,9 +202,8 @@ const ProductViewPage: React.FC = () => {
                 <button
                   key={url + index}
                   onClick={() => setActiveImage(index)}
-                  className={`shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-[#f5f5f5] border-2 transition-colors ${
-                    activeImage === index ? "border-black" : "border-transparent"
-                  }`}
+                  className={`shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-[#f5f5f5] border-2 transition-colors ${activeImage === index ? "border-black" : "border-transparent"
+                    }`}
                 >
                   <img
                     src={url}
@@ -267,7 +266,7 @@ const ProductViewPage: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           <h3 className="font-bold text-xl md:text-heading2 md:leading-heading2 mb-6">
-            Other related products
+            Related Products
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8">
             {filteredData?.map((item, index) => (
@@ -291,7 +290,7 @@ const ProductViewPage: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           <h3 className="font-bold text-xl md:text-heading2 md:leading-heading2 mb-2">
-            Other related products
+            Related Products
           </h3>
           <p className="text-gray-500">No related products found.</p>
         </motion.section>
