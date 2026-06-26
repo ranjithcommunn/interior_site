@@ -1,3 +1,21 @@
+# Applies to all three apps in this repo: frontend-website/, frontend-admin/, backend/
+# (patterns are unanchored, so they match at any depth)
+
+# Dependencies
+node_modules
+
+# Build output
+dist
+dist-ssr
+build
+*.tsbuildinfo
+
+# Env / secrets
+.env
+.env.local
+.env.*.local
+*.local
+
 # Logs
 logs
 *.log
@@ -7,14 +25,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
-.env
-
-# Editor directories and files
+# Editor / OS
 .vscode/*
 !.vscode/extensions.json
 .idea

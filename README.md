@@ -1,3 +1,14 @@
+# Vibrer Storefront
+
+This is the storefront app (this folder). The repo also contains:
+
+- [`backend/`](backend/README.md) — Node.js + TypeScript + MongoDB API (replaces the old Medusa backend)
+- [`admin/`](admin/README.md) — React + TypeScript admin panel for managing categories/products/enquiries
+
+Run all three locally: `backend` (port 9000) → `admin` (port 5174) → this app (`npm run dev`, port 5173). The storefront's `.env` `VITE_BACKEND_URL` should point at the running `backend`.
+
+---
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
