@@ -2,7 +2,6 @@ import { Menu, ChevronDown } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Logo from "../assets/logo.png";
-import UserIcon from "../assets/user_icon.svg";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
@@ -26,8 +25,6 @@ const fetchProducts = async () => {
   if (!response.ok) throw new Error("Failed to fetch products");
   return response.json();
 };
-
-const ADMIN_URL = import.meta.env.VITE_ADMIN_URL || "http://localhost:5174";
 
 const NavBar = () => {
   const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
@@ -72,7 +69,7 @@ const NavBar = () => {
   );
 
   return (
-    <nav className="bg-black grid grid-cols-[auto_1fr_auto] items-center h-20 md:h-28 px-5 md:px-12 lg:px-20 gap-6 min-w-full font-Poppins sticky top-0 z-50">
+    <nav className="bg-black grid grid-cols-[auto_1fr] items-center h-20 md:h-28 px-5 md:px-12 lg:px-20 gap-6 min-w-full font-Poppins sticky top-0 z-50">
       {/* Column 1: Logo */}
       <Link to="/" className="flex items-center justify-center shrink-0 self-center">
         <img
@@ -82,17 +79,26 @@ const NavBar = () => {
         />
       </Link>
 
-      {/* Column 2: Desktop Menu (centered) */}
-      <div className="hidden md:flex items-center justify-center">
+      {/* Column 2: Desktop Menu (centered) + Mobile menu toggle (right) */}
+      <div className="flex items-center justify-end md:justify-center w-full">
+        <div className="hidden md:flex items-center justify-center">
         {!isLoading ? (
           <ul className="bg-black flex items-center gap-5 lg:gap-7 whitespace-nowrap" ref={dropdownRef}>
+            <li>
+              <Link
+                to={"/shop"}
+                className="flex items-center gap-1.5 py-2 text-white text-sm font-medium tracking-wide hover:text-gray-300 transition-colors"
+              >
+                Shop
+              </Link>
+            </li>
             {menuList?.map((item) => (
               <li key={item.id} className="group relative">
                 {item.category_children?.length > 0 ? (
                   <div className="flex items-center gap-1">
                     <Link
                       to={`/${item.handle}/${item.id}`}
-                      className="py-2 text-white text-button2 leading-button2 font-medium tracking-wide hover:text-gray-300 transition-colors"
+                      className="py-2 text-white text-sm font-medium tracking-wide hover:text-gray-300 transition-colors"
                     >
                       {item.name}
                     </Link>
@@ -113,7 +119,7 @@ const NavBar = () => {
                 ) : (
                   <Link
                     to={`/${item.handle}/${item.id}`}
-                    className="flex items-center gap-1.5 py-2 text-white text-button2 leading-button2 font-medium tracking-wide hover:text-gray-300 transition-colors"
+                    className="flex items-center gap-1.5 py-2 text-white text-sm font-medium tracking-wide hover:text-gray-300 transition-colors"
                   >
                     {item.name}
                   </Link>
@@ -154,8 +160,16 @@ const NavBar = () => {
             ))}
             <li>
               <Link
+                to={"/about-us"}
+                className="flex items-center gap-1.5 py-2 text-white text-sm font-medium tracking-wide hover:text-gray-300 transition-colors"
+              >
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link
                 to={"/contact-us"}
-                className="flex items-center gap-1.5 py-2 text-white text-button2 leading-button2 font-medium tracking-wide hover:text-gray-300 transition-colors"
+                className="flex items-center gap-1.5 py-2 text-white text-sm font-medium tracking-wide hover:text-gray-300 transition-colors"
               >
                 Contact Us
               </Link>
@@ -163,25 +177,12 @@ const NavBar = () => {
           </ul>
         ) : (
           <ul className="flex items-center gap-5 lg:gap-7">
-            {Array.from({ length: 7 }).map((_, i) => (
+            {Array.from({ length: 9 }).map((_, i) => (
               <li key={i} className="h-4 w-14 rounded-md bg-white/15 animate-pulse" />
             ))}
           </ul>
         )}
-      </div>
-
-      {/* Column 3: Admin login icon + mobile menu */}
-      <div className="flex items-center justify-end gap-3 md:gap-5">
-        <a
-          href={ADMIN_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Admin Login"
-          title="Admin Login"
-          className="p-2 rounded-full hover:bg-white/10 transition-colors"
-        >
-          <img src={UserIcon} width={18} height={18} alt="Admin Login" />
-        </a>
+        </div>
 
         {/* Mobile Menu Icon */}
         <button
@@ -205,6 +206,15 @@ const NavBar = () => {
             ref={dropdownMobRef}
           >
           <ul className="divide-y divide-white/10 px-5">
+            <li className="py-1">
+              <Link
+                to={"/shop"}
+                className="flex items-center gap-2 text-white text-base font-medium w-full py-3"
+                onClick={handleLinkClick}
+              >
+                Shop
+              </Link>
+            </li>
             {menuList?.map((item) => (
               <li key={item.id} className="group relative py-1">
                 {item.category_children?.length > 0 ? (
@@ -267,6 +277,15 @@ const NavBar = () => {
                 </AnimatePresence>
               </li>
             ))}
+            <li className="py-1">
+              <Link
+                to={"/about-us"}
+                className="flex items-center gap-2 text-white text-base font-medium w-full py-3"
+                onClick={handleLinkClick}
+              >
+                About Us
+              </Link>
+            </li>
             <li className="py-1">
               <Link
                 to={"/contact-us"}

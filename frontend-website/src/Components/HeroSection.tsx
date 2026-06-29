@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import "swiper/swiper-bundle.css";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
+import { Autoplay, Pagination, EffectFade } from "swiper/modules";
 import HeroBanner from "../assets/hero_section_banner.png";
 
 interface Banner {
@@ -29,6 +31,7 @@ const fetchBanners = async () => {
 
 const HeroSection: React.FC = () => {
   const { data } = useQuery<{ banners: Banner[] }>(["banners"], fetchBanners);
+  const swiperRef = useRef<SwiperType | null>(null);
 
   const banners = data?.banners ?? [];
 
@@ -50,21 +53,46 @@ const HeroSection: React.FC = () => {
         transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
       >
         {slides.length === 1 ? (
-          <BannerSlide banner={slides[0]} />
+          <div className="rounded-xl overflow-hidden">
+            <BannerSlide banner={slides[0]} />
+          </div>
         ) : (
-          <Swiper
-            modules={[Autoplay, Pagination]}
-            autoplay={{ delay: 4000, disableOnInteraction: false }}
-            pagination={{ clickable: true }}
-            loop
-            className="rounded-xl overflow-hidden"
-          >
-            {slides.map((banner) => (
-              <SwiperSlide key={banner.id}>
-                <BannerSlide banner={banner} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          <div className="relative group rounded-xl overflow-hidden">
+            <Swiper
+              modules={[Autoplay, Pagination, EffectFade]}
+              effect="fade"
+              fadeEffect={{ crossFade: true }}
+              speed={800}
+              autoplay={{ delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true }}
+              pagination={{ clickable: true }}
+              loop
+              onSwiper={(swiper) => (swiperRef.current = swiper)}
+              className="rounded-xl overflow-hidden"
+            >
+              {slides.map((banner) => (
+                <SwiperSlide key={banner.id}>
+                  <BannerSlide banner={banner} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+
+            <button
+              type="button"
+              aria-label="Previous slide"
+              onClick={() => swiperRef.current?.slidePrev()}
+              className="absolute z-10 left-3 md:left-5 top-1/2 -translate-y-1/2 w-10 h-10 md:w-11 md:h-11 rounded-full bg-white/90 shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button
+              type="button"
+              aria-label="Next slide"
+              onClick={() => swiperRef.current?.slideNext()}
+              className="absolute z-10 right-3 md:right-5 top-1/2 -translate-y-1/2 w-10 h-10 md:w-11 md:h-11 rounded-full bg-white/90 shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
         )}
       </motion.div>
     </motion.main>

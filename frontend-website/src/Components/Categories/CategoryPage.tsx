@@ -1,11 +1,13 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton, ProductGridSkeleton } from "../Skeleton";
+import Seo from "../Seo";
 import {
   ChevronDown,
   ChevronLeft,
   ChevronRight,
   ChevronUp,
+  PackageSearch,
 } from "lucide-react";
 
 import "swiper/swiper-bundle.css";
@@ -154,8 +156,18 @@ const CategoryPage = () => {
     categoryProductsData?.products[2],
   ].filter(Boolean);
 
+  const pageTitle = subCategory
+    ? `${formatProductName(subCategory)} | ${formatProductName(category || "")}`
+    : formatProductName(category || "");
+
   return (
     <main className="flex-grow box-border font-Poppins">
+      <Seo
+        title={pageTitle}
+        description={`Shop premium ${pageTitle.toLowerCase()} furniture at Vibrer. Customisable designs, quality materials, and a seamless buying experience.`}
+        keywords={`${pageTitle}, ${pageTitle} furniture, buy ${pageTitle} online, Vibrer ${pageTitle}`}
+        path={`/${category}${subCategory ? `/${subCategory}` : ""}/${category_id}`}
+      />
       {/* Mobile Dropdown for Categories */}
       <div className="md:hidden w-full mt-4 block px-4">
         <div className="bg-white flex flex-col border border-gray-200 p-4 rounded-2xl shadow-sm">
@@ -324,8 +336,13 @@ const CategoryPage = () => {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center w-full py-20 text-center">
-              <p className="text-gray-500">
-                No products found in this category yet.
+              <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mb-4">
+                <PackageSearch size={26} className="text-gray-400" />
+              </div>
+              <p className="font-semibold text-gray-800 mb-1">No products yet</p>
+              <p className="text-sm text-gray-500 max-w-xs">
+                We're still adding products to this category. Check back soon
+                or browse another category from the sidebar.
               </p>
             </div>
           )}

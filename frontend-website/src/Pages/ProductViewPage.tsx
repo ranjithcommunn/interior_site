@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 import ProductCard from "@/Components/ProductCard";
 import { Skeleton, ProductGridSkeleton } from "@/Components/Skeleton";
+import Seo from "@/Components/Seo";
 
 interface ProductImage {
   url: string;
@@ -140,6 +141,20 @@ const ProductViewPage: React.FC = () => {
 
   return (
     <main className="box-border px-5 md:px-20 py-6 font-Poppins">
+      {product && (
+        <Seo
+          title={product.title}
+          description={
+            product.description
+              ? product.description.slice(0, 160)
+              : `Buy ${product.title} at Vibrer. Premium, customisable furniture with a seamless buying experience.`
+          }
+          keywords={`${product.title}, ${currentCategory?.name || ""}, Vibrer furniture, buy ${product.title} online`}
+          image={product.thumbnail}
+          type="product"
+          path={`/product/${product.id}`}
+        />
+      )}
       {/* Breadcrumb */}
       <nav className="flex items-center gap-1.5 text-sm text-gray-500 mb-6 flex-wrap">
         <Link to="/" className="hover:text-black transition-colors">

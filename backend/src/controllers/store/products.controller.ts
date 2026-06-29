@@ -6,13 +6,21 @@ import { asyncHandler } from "../../utils/asyncHandler";
 import { ApiError } from "../../utils/ApiError";
 import { serializeProduct } from "../../utils/serializers";
 
+const sortMap: Record<string, Record<string, 1 | -1>> = {
+  newest: { createdAt: -1 },
+  name_asc: { title: 1 },
+  name_desc: { title: -1 },
+  price_asc: { price: 1 },
+  price_desc: { price: -1 },
+};
+
 export const listProducts = asyncHandler(async (req: Request, res: Response) => {
-  const { category_id, limit, featured } = req.query;
+  const { category_id, limit, featured, search, sort, page = "1" } = req.query;
 
   const filter: Record<string, unknown> = { isActive: true };
   if (category_id) {
     if (!Types.ObjectId.isValid(String(category_id))) {
-      res.json({ products: [] });
+      res.json({ products: [], total: 0, page: 1, limit: 0 });
       return;
     }
     // Products are assigned directly to sub-categories. When viewing a
@@ -25,14 +33,23 @@ export const listProducts = asyncHandler(async (req: Request, res: Response) => 
   if (featured === "true") {
     filter.isFeatured = true;
   }
+  if (search) {
+    filter.title = { $regex: String(search), $options: "i" };
+  }
 
+  const pageNum = Math.max(Number(page) || 1, 1);
   const parsedLimit = Math.min(Number(limit) || 100, 100);
+  const sortObj = sortMap[String(sort)] || { rank: 1, createdAt: -1 };
 
-  const products = await Product.find(filter)
-    .sort({ rank: 1, createdAt: -1 })
-    .limit(parsedLimit);
+  const [products, total] = await Promise.all([
+    Product.find(filter)
+      .sort(sortObj)
+      .skip((pageNum - 1) * parsedLimit)
+      .limit(parsedLimit),
+    Product.countDocuments(filter),
+  ]);
 
-  res.json({ products: products.map(serializeProduct) });
+  res.json({ products: products.map(serializeProduct), total, page: pageNum, limit: parsedLimit });
 });
 
 export const getProductById = asyncHandler(async (req: Request, res: Response) => {

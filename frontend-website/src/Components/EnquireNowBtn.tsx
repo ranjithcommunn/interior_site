@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CheckCircle2, MessageSquarePlus, X } from "lucide-react";
+import { CheckCircle2, MessageSquarePlus, User, Phone, Mail, MessageSquare, X } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -107,16 +107,19 @@ const EnquireNowBtn: React.FC<EnquireNowBtnProps> = ({ productId }) => {
           <button
             type="button"
             onClick={handleDialogClose}
-            className="absolute right-4 top-4 text-gray-400 hover:text-black transition-colors"
+            className="absolute right-4 top-4 z-10 text-gray-400 hover:text-black transition-colors"
           >
             <X size={18} />
           </button>
 
-          <AlertDialogHeader className="px-6 pt-6 pb-1">
+          <AlertDialogHeader className="bg-[#FAFAFA] px-6 pt-7 pb-5 space-y-3 border-b border-gray-100">
+            <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center">
+              <MessageSquarePlus size={20} />
+            </div>
             <AlertDialogTitle>
               <h4 className="font-bold text-xl font-Poppins">Request a Call Back</h4>
             </AlertDialogTitle>
-            <AlertDialogDescription className="text-sm text-gray-500">
+            <AlertDialogDescription className="text-sm text-gray-500 leading-relaxed">
               Share your details and our team will get in touch to help customise this piece for you.
             </AlertDialogDescription>
           </AlertDialogHeader>
@@ -139,54 +142,68 @@ const EnquireNowBtn: React.FC<EnquireNowBtnProps> = ({ productId }) => {
               </button>
             </div>
           ) : (
-            <form className="px-6 pb-6 pt-3 space-y-3" onSubmit={handleSubmit}>
+            <form className="px-6 pb-6 pt-5 space-y-3.5" onSubmit={handleSubmit}>
               <div>
-                <input
-                  name="name"
-                  placeholder="Name"
-                  type="text"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className={`p-3 w-full rounded-lg border text-sm outline-none transition-colors ${
-                    errors.name ? "border-red-400" : "border-gray-200 focus:border-black"
-                  }`}
-                />
+                <div className="relative">
+                  <User size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+                  <input
+                    name="name"
+                    placeholder="Name"
+                    type="text"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className={`p-3 pl-10 w-full rounded-lg border text-sm outline-none transition-colors ${
+                      errors.name ? "border-red-400 bg-red-50/40" : "border-gray-200 focus:border-black"
+                    }`}
+                  />
+                </div>
                 {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
               </div>
-              <div>
-                <input
-                  name="phone"
-                  placeholder="Phone Number"
-                  type="tel"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className={`p-3 w-full rounded-lg border text-sm outline-none transition-colors ${
-                    errors.phone ? "border-red-400" : "border-gray-200 focus:border-black"
-                  }`}
-                />
-                {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <div className="relative">
+                    <Phone size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+                    <input
+                      name="phone"
+                      placeholder="Phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className={`p-3 pl-10 w-full rounded-lg border text-sm outline-none transition-colors ${
+                        errors.phone ? "border-red-400 bg-red-50/40" : "border-gray-200 focus:border-black"
+                      }`}
+                    />
+                  </div>
+                  {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+                </div>
+                <div>
+                  <div className="relative">
+                    <Mail size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+                    <input
+                      name="email"
+                      placeholder="Email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className={`p-3 pl-10 w-full rounded-lg border text-sm outline-none transition-colors ${
+                        errors.email ? "border-red-400 bg-red-50/40" : "border-gray-200 focus:border-black"
+                      }`}
+                    />
+                  </div>
+                  {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+                </div>
               </div>
-              <div>
-                <input
-                  name="email"
-                  placeholder="Email"
-                  type="email"
-                  value={formData.email}
+              <div className="relative">
+                <MessageSquare size={16} className="absolute left-3.5 top-3.5 text-gray-400" />
+                <textarea
+                  name="message"
+                  rows={4}
+                  placeholder="Message (optional)"
+                  value={formData.message}
                   onChange={handleChange}
-                  className={`p-3 w-full rounded-lg border text-sm outline-none transition-colors ${
-                    errors.email ? "border-red-400" : "border-gray-200 focus:border-black"
-                  }`}
+                  className="p-3 pl-10 w-full rounded-lg border border-gray-200 text-sm outline-none focus:border-black transition-colors resize-none"
                 />
-                {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
               </div>
-              <textarea
-                name="message"
-                rows={4}
-                placeholder="Message (optional)"
-                value={formData.message}
-                onChange={handleChange}
-                className="p-3 w-full rounded-lg border border-gray-200 text-sm outline-none focus:border-black transition-colors resize-none"
-              />
               {submitError && <p className="text-red-500 text-sm">{submitError}</p>}
               <div className="flex items-center justify-end gap-2 pt-1">
                 <button

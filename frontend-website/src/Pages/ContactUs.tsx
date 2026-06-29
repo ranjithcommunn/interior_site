@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import phoneIcon from "../assets/phone_icon.svg";
 import EmailIcon from "../assets/mail_icon.svg";
 import LocationIcon from "../assets/location_icon.svg";
+import Seo from "../Components/Seo";
 
 interface ContactData {
   id: number;
@@ -117,6 +118,12 @@ const ContactUs: React.FC = () => {
 
   return (
     <main className="font-Poppins bg-white">
+      <Seo
+        title="Contact Us"
+        description="Get in touch with Vibrer for custom furniture enquiries, quotes, and support. Call, email, or visit our Bengaluru showroom."
+        keywords="contact Vibrer, Vibrer customer support, furniture enquiry, Vibrer phone number, Vibrer email, Vibrer Bengaluru address"
+        path="/contact-us"
+      />
       {/* Header */}
       <section className="flex items-center justify-center text-center flex-col gap-3 pt-16 pb-12 px-5 md:px-20 bg-[#FAFAFA]">
         <motion.span

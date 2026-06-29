@@ -13,6 +13,7 @@ import SearchImage05 from "../assets/search_Image05.png";
 import SearchImage06 from "../assets/search_Image06.png";
 import SearchImage07 from "../assets/search_Image07.png";
 import SearchImage08 from "../assets/search_Image08.png";
+import Seo from "../Components/Seo";
 import SearchImage09 from "../assets/search_Image09.png";
 
 import SearchSection02Image01 from "../assets/search_section02_image01.png";
@@ -234,6 +235,7 @@ const Search: React.FC = () => {
 
   return (
     <main className="flex-grow box-border font-Poppins">
+      <Seo title="Search" path="/search" noindex />
       {/* Mobile Dropdown */}
       <div className="md:hidden w-full mt-3 block px-4">
         <div className="bg-white flex flex-col border p-3 px-4 rounded-2xl">
