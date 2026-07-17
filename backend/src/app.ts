@@ -25,7 +25,7 @@ export function createApp(): Express {
 
   app.use(
     cors({
-      origin: [env.storeCorsOrigin, env.adminCorsOrigin],
+      origin: [...env.storeCorsOrigins, ...env.adminCorsOrigins],
     })
   );
   app.use(express.json());
