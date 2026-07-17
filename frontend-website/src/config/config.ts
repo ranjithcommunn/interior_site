@@ -1,1 +1,1 @@
-export const BackendURL = "https://api.vibrer.co.in"
+export const BackendURL = import.meta.env.VITE_BACKEND_URL as string;

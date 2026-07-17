@@ -26,7 +26,7 @@ function loadEnv() {
 const env = loadEnv();
 const BACKEND_URL = env.VITE_BACKEND_URL || "http://localhost:9000";
 const API_KEY = env.VITE_API_KEY || "";
-const SITE_URL = "https://vibrer.co.in";
+const SITE_URL = env.VITE_SITE_URL || "https://vibrerfurniture.in";
 
 const headers = {
   "x-publishable-api-key": API_KEY,

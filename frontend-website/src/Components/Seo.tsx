@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 
 const SITE_NAME = "Vibrer";
-const SITE_URL = "https://vibrer.co.in";
+const SITE_URL = "https://vibrerfurniture.in";
 const DEFAULT_TITLE = "Vibrer | Premium Custom Furniture for Home & Office";
 const DEFAULT_DESCRIPTION =
   "Vibrer by SREGA Electronics & Furniture LLP offers premium, customisable furniture for living rooms, dining, bedrooms, office, storage, study and outdoor spaces. Design and order your dream furniture online.";
