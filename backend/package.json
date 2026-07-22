@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "type": "commonjs",
   "scripts": {
-    "dev": "nodemon --watch src --ext ts --exec ts-node src/index.ts",
-    "build": "tsc -p tsconfig.json",
-    "start": "node dist/index.js",
+    "dev": "node api.js && nodemon --watch src --ext ts --exec ts-node src/index.ts",
+    "build": "node api.js && tsc -p tsconfig.json",
+    "start": "node api.js && node dist/index.js",
     "seed": "ts-node scripts/seed.ts",
     "import-catalog": "ts-node scripts/importCatalog.ts",
     "create-admin": "ts-node scripts/createAdmin.ts"

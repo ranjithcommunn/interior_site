@@ -125,12 +125,12 @@ const ProductCategories: React.FC = () => {
 
   return (
     <motion.section
-      className="flex items-center flex-col px-5 md:px-20 relative my-10"
+      className="w-full px-5 md:px-20 relative my-10"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, ease: "easeOut" }}
     >
-      <h1 className="text-xl md:text-3xl font-bold my-5 font-Poppins">
+      <h1 className="text-xl md:text-3xl font-bold my-5 font-Poppins text-center">
         Product Categories
       </h1>
       <div className="relative w-full">
