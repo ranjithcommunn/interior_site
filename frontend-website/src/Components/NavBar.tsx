@@ -158,22 +158,6 @@ const NavBar = () => {
                 </AnimatePresence>
               </li>
             ))}
-            <li>
-              <Link
-                to={"/about-us"}
-                className="flex items-center gap-1.5 py-2 text-white text-sm font-medium tracking-wide hover:text-gray-300 transition-colors"
-              >
-                About Us
-              </Link>
-            </li>
-            <li>
-              <Link
-                to={"/contact-us"}
-                className="flex items-center gap-1.5 py-2 text-white text-sm font-medium tracking-wide hover:text-gray-300 transition-colors"
-              >
-                Contact Us
-              </Link>
-            </li>
           </ul>
         ) : (
           <ul className="flex items-center gap-5 lg:gap-7">
@@ -277,24 +261,6 @@ const NavBar = () => {
                 </AnimatePresence>
               </li>
             ))}
-            <li className="py-1">
-              <Link
-                to={"/about-us"}
-                className="flex items-center gap-2 text-white text-base font-medium w-full py-3"
-                onClick={handleLinkClick}
-              >
-                About Us
-              </Link>
-            </li>
-            <li className="py-1">
-              <Link
-                to={"/contact-us"}
-                className="flex items-center gap-2 text-white text-base font-medium w-full py-3"
-                onClick={handleLinkClick}
-              >
-                Contact Us
-              </Link>
-            </li>
           </ul>
           </motion.div>
         )}
