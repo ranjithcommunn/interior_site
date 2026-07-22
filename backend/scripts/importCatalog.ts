@@ -73,6 +73,8 @@ const TOP_LEVEL_BY_NAME: Record<string, string> = {
   office: "office",
   outdoor: "outdoor",
   mattress: "matress",
+  "living room": "living",
+  "study room": "study",
 };
 
 // Known casing fixes so near-duplicate sub-categories collapse into one
@@ -80,6 +82,7 @@ const TOP_LEVEL_BY_NAME: Record<string, string> = {
 const SUBCATEGORY_ALIASES: Record<string, string> = {
   "tv units": "TV Units",
   "chairs": "Chairs",
+  "chair": "Chairs",
   "recliners": "Recliners",
   "office boss chairs": "Office Boss Chairs",
   "cabin tables": "Cabin Tables",
@@ -88,9 +91,22 @@ const SUBCATEGORY_ALIASES: Record<string, string> = {
   "outdoor sofas": "Outdoor Sofas",
   "pouffers": "Pouffes",
   "pouffes": "Pouffes",
+  "sofas": "Sofas",
   "work tables": "Work Tables",
   "work station tables": "Work Station Tables",
   "wing chair": "Wing Chair",
+  "office waiting chairs": "Waiting Chairs",
+  "waiting chair": "Waiting Chairs",
+  "visitor chair": "Visitor Chairs",
+  "study table": "Study Tables",
+  "study tables": "Study Tables",
+  "dining chairs": "Dining Chairs",
+  "dining chair": "Dining Chairs",
+  "bean bag": "Bean Bags",
+  "double bed": "Double Bed",
+  "king size": "King Size",
+  "queen size": "Queen Size",
+  "single bed": "Single Bed",
 };
 
 function normalizeSubCategoryName(raw: string): string {
